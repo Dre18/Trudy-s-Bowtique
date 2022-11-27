@@ -44,7 +44,7 @@ public class UserAuth extends JFrame implements ActionListener {
 
     }
 
-    @Override
+   
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == loginButton) {
@@ -77,8 +77,8 @@ public class UserAuth extends JFrame implements ActionListener {
         if (e.getSource() == showPassword) {
             if (showPassword.isSelected()) {
                 passwordField.setEchoChar((char) 0);
-                // userTF.disable();
-                // passwordField.disable();
+                userTF.disable();
+                passwordField.disable();
             } else {
                 passwordField.setEchoChar('*');
             }
