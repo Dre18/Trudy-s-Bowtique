@@ -1,4 +1,4 @@
-package OrderComponent;
+package OrderManagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class AddOrder {{
 	
 	FileWriter write;
-	PrintWriter printTo;
+	//PrintWriter printTo;
 	
 	//Scanner scantofile = new Scanner(System.in);
 	//private void createFile()

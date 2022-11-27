@@ -50,8 +50,8 @@ public class SystemDisplay extends JPanel {
                     JOptionPane.showInputDialog("System Error");
 
                 }
-
-            }
+                
+                }
         });
     }
 

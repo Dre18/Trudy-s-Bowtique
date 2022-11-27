@@ -1,4 +1,4 @@
-package OrderComponent;
+package OrderManagement;
 
 public class MainOrder {
 
