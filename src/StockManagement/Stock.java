@@ -5,14 +5,10 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.io.File;
-
 import java.io.IOException;
 import java.util.ArrayList;
-
 import java.util.Scanner;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -51,18 +47,14 @@ public class Stock extends JPanel {
         model = new DefaultTableModel(columnNames, 0);
         table = new JTable(model);
         showTable(ilist);
-
         table.setPreferredScrollableViewportSize(new Dimension(500, ilist.size() * 15 + 50));
         table.setFillsViewportHeight(true);
         scrollPane = new JScrollPane(table);
         add(scrollPane);
-
         Item = new JTextField(10);
         Quantity = new JTextField(10);
         Total = new JTextField(10);
-        
         pnlDisplay.setLayout(new GridLayout(4, 0));
-
         pnlDisplay.add(new JLabel("New Item:"));
         pnlDisplay.add(Item);
         pnlDisplay.add(new JLabel("Amount:"));
@@ -77,12 +69,8 @@ public class Stock extends JPanel {
         close.addActionListener(new CloseButtonListener());
         close.setBackground(Color.lightGray);
         delete.setBackground(Color.red);
-
-       
         pnlCommand.add(delete, BorderLayout.CENTER);
-
         pnlCommand.add(update, BorderLayout.CENTER);
-
         pnlCommand.add(pnlDisplay, BorderLayout.PAGE_START);
         add(pnlCommand);
 
