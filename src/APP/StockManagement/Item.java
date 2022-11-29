@@ -21,11 +21,11 @@ public class Item{
             return quantity;
         }
 
-        public void changeQuantity(int x)
+        public void changeQuantity(int x){
                 this.quantity -= x;
        
     
-        
+        }
         
     }
        
