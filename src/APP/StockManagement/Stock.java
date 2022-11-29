@@ -5,8 +5,13 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JButton;
@@ -172,36 +177,58 @@ public class Stock extends JPanel {
 
     
     private class DeleteButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource()==delete){
-                int row=table.getSelectedRow();
+        public void actionPerformed(ActionEvent a) {
+            if (a.getSource()==delete){
+                int row = table.getSelectedRow();
+                String val ="";
                 for (Item i : ilist) {
-                    if (i.getItemName() == (table.getValueAt(row, 1)).toString());
+                    if (i.getItemName().equals(table.getValueAt(row, 0))){
+                        val=i.getItemName();
+                        removeRecord(val);
                         ilist.remove(i);
-                    model.setRowCount(0);
-                    showTable(ilist);
-
-
-                try {
-
-                    Scanner pscan = new Scanner(new File(file));
-                    while (pscan.hasNext()) {
-                        String[] nextLine = pscan.nextLine().split(" ");
-                        if (nextLine[0].equals(i.getItemName())) {
-
-                        }
-                        pscan.close();
-                    }
+                        model.setRowCount(0);
+                        showTable(ilist);
+                        break;
+               
+                    }   
                 }
-
-                catch (IOException IO) {
-                }
-            
-                }
-                
+            }
         }
+        public void removeRecord(String val){
+            String tempfile = "temp.dat";
+            String currentline;
+            File oldfile= new File(file);
+            File newfile = new File(tempfile);
+            try {
+                FileWriter fw = new FileWriter(tempfile, true);
+                BufferedWriter bw = new BufferedWriter(fw);
+                PrintWriter pw = new PrintWriter(bw);
 
-    }
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
+                
+                while ((currentline =br.readLine()) != null) {
+                    String[] data = currentline.split(" ");
+                    if (!(data[0].equals(val))) {
+                         pw.println(currentline);
+                    }
+                    
+                }
+                pw.flush();
+                pw.close();
+                br.close();
+                fr.close();
+                fw.close();
+                bw.close();
+
+                oldfile.delete();
+                File temp = new File(file);
+                newfile.renameTo(temp);
+            }
+
+            catch (IOException IO) {
+            }
+        }
     }
     private class CloseButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
