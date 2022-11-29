@@ -4,7 +4,7 @@ public class Item{
         private String name;
         private int stockID;
     
-        // A constructor that takes in the parameters and sets them to the variables.
+        
         public Item(String name,int stockID) {
             super();
     

@@ -1,4 +1,5 @@
 package APP.System_User_Interface;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -9,12 +10,15 @@ import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+
+import javax.print.attribute.standard.MediaSize.Other;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 
 public class MainView extends JPanel {
 
+    public JButton report;
     public JButton Stock;
     public JButton Order;
     private JTable table;
@@ -22,7 +26,7 @@ public class MainView extends JPanel {
 
     
 
-    public MainView() {
+   public MainView() {
 
         JPanel CommandPanel = new JPanel();
         JPanel displayPanel = new JPanel();
@@ -42,17 +46,37 @@ public class MainView extends JPanel {
         Stock.setBounds(700, 430, 200, 68);
         Stock.setBackground(Color.lightGray);
         Stock.addActionListener(new StockButtonListener());
+        
+        report = new JButton (" Monthly Sales Report");
+        report.setBounds(1000, 430, 200, 68);
+        report.setBackground(Color.lightGray);
+        report.addActionListener(new ReportButtonListener());
 
         displayPanel.add(Order);
         displayPanel.add(Stock);
+        displayPanel.add(report);
 
         add(CommandPanel);
         add(displayPanel);
     }
+    
+    private class ReportButtonListener implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+        System.exit(0);
+    }
+
+}  
 
     private class StockButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.exit(0);
+            
+            APP.StockManagement.Stock stock = new APP.StockManagement.Stock();
+            
+            stock.createAndShowGUI();
+            SystemDisplay newContentPane = new SystemDisplay();
+            newContentPane.setOpaque(false);
+            
+            
         }
 
     }
@@ -62,11 +86,14 @@ public class MainView extends JPanel {
             if (e.getSource() == Order) {
 
                 try {
+                    
                     SystemDisplay newContentPane = new SystemDisplay();
-                    APP.AuthenticationandAuthorization.UserAuth frame = new UserAuth();
-                    newContentPane.setOpaque(true);
-                    frame.setTitle("Sign in");
-                    frame.setPreferredSize(new Dimension(500, 600));
+                    MainView mainView = new MainView();
+                    APP.OrderManagement.Order frame = new APP.OrderManagement.Order();
+                    newContentPane.setOpaque(false);
+                    mainView.setOpaque(false);
+                    frame.setTitle("Order");
+                    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
                     frame.setResizable(true);
                     frame.pack();
                     frame.setVisible(true);
@@ -78,6 +105,17 @@ public class MainView extends JPanel {
             }
 
         }
+
+    }
+
+    public void createAndShowGUI() {
+        JFrame frame = new JFrame("Trudy's Bowtique");
+        MainView newContentPane = new MainView();
+        frame.setPreferredSize(frame.getToolkit().getScreenSize());
+        newContentPane.setOpaque(true);
+        frame.setContentPane(newContentPane);
+        frame.pack();
+        frame.setVisible(true);
 
     }
 

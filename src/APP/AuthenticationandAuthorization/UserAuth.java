@@ -1,5 +1,8 @@
 package APP.AuthenticationandAuthorization;
+
 import javax.swing.*;
+
+import APP.StockManagement.Stock;
 import APP.System_User_Interface.MainView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -58,9 +61,9 @@ public class UserAuth extends JFrame implements ActionListener {
             for (int i = 0; i < user.length; i++) {
                 String[] s = user[i].split(" ");
                 if (userText.equals(s[0]) && pwdText.equals(s[1])) {
-                MainView newContentPane = new MainView();
-                    // MainView frame = new MainView();
-                 
+                MainView mainView = new MainView();
+                
+                mainView.createAndShowGUI();
                     a = 1;
                     setVisible(false);
                 }

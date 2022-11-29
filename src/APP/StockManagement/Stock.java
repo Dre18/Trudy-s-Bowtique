@@ -34,6 +34,7 @@ public class Stock extends JPanel {
     private JTextField Quantity;
     private JTextField Total;
     private JButton delete;
+    
 
   
     public Stock() {
@@ -76,15 +77,17 @@ public class Stock extends JPanel {
     }
 
     
-   
+    public void reduceStock(){
+        
+    }
 
 
-    private void addToStock(Item i) {
+    public void addToStock(Item i) {
         String[] item = { "" + i.getItem()};
         model.addRow(item);
     }
 
-    void createAndShowGUI() {
+    public void createAndShowGUI() {
         JFrame frame = new JFrame("Trudy's Bowtique");
         Stock newContentPane = new Stock();
         frame.setPreferredSize(frame.getToolkit().getScreenSize());
