@@ -23,7 +23,9 @@ public class Stock extends JPanel {
     
     private JButton close;
     private JButton update;
-    
+    private JButton addItem;
+    private JButton delete;
+
     private JPanel pnlCommand;
     private JPanel pnlDisplay;
     private ArrayList<Item> ilist;
@@ -32,17 +34,19 @@ public class Stock extends JPanel {
     private DefaultTableModel model;
     private JTextField Item;
     private JTextField Quantity;
-    private JButton delete;
-    
+    private JPanel pnl;
+   
+    private static final String file= "StockList.dat";
  
   
     public Stock() {
         super(new GridLayout(2, 1));
+        pnl=this;
         pnlCommand = new JPanel();
         pnlDisplay = new JPanel();
         // pnlDisplay.setBounds(150, 300, 15, 30);
         pnlDisplay.setBackground(Color.LIGHT_GRAY);
-        ilist = loadStock("StockList.dat");
+        ilist = loadStock(file);
         String[] columnNames = { "Items", "Quantity"};
         model = new DefaultTableModel(columnNames, 0);
         table = new JTable(model);
@@ -59,17 +63,31 @@ public class Stock extends JPanel {
         pnlDisplay.add(Item);
         pnlDisplay.add(new JLabel("Amount:"));
         pnlDisplay.add(Quantity);
-       
-        delete = new JButton("Delete");
-        close = new JButton("Close");
-        update = new JButton("Update");
+        addItem = new JButton("Add Item");
+        addItem.addActionListener(new AddItemButtonListener());
+        addItem.setBackground(Color.GREEN);
+        pnlDisplay.add(new JLabel(" "));
+        pnlDisplay.add(addItem);
 
+        delete = new JButton("Delete Item");
+        close = new JButton("Close");
+        update = new JButton("Update Item");
         
+        
+        
+        
+        update.addActionListener(new UpdateButtonListener());
+        delete.addActionListener(new DeleteButtonListener());
         close.addActionListener(new CloseButtonListener());
+         
+       
+        update.setBackground(Color.ORANGE);
         close.setBackground(Color.lightGray);
         delete.setBackground(Color.red);
-        pnlCommand.add(delete, BorderLayout.CENTER);
+        
         pnlCommand.add(update, BorderLayout.CENTER);
+        pnlCommand.add(delete, BorderLayout.CENTER);
+        pnlCommand.add(close, BorderLayout.CENTER);
         pnlCommand.add(pnlDisplay, BorderLayout.PAGE_START);
         add(pnlCommand);
 
@@ -80,13 +98,12 @@ public class Stock extends JPanel {
 
         try {
             pscan = new Scanner(new File(pfile));
-            while (pscan.hasNextLine()) {
+            while (pscan.hasNext()) {
                 String[] nextLine = pscan.nextLine().split(" ");
                 String name = nextLine[0];
-                System.out.print("something went wrong");
                 int quantity = Integer.parseInt(nextLine[1]);
-                Item item = new Item(name, quantity);
-                ilist.add(item);
+                 Item item = new Item(name, quantity);
+                 ilist.add(item);
 
             }
 
@@ -131,17 +148,61 @@ public class Stock extends JPanel {
 
 
     
-    private void showTable(ArrayList<Item> ilist2) {
-        if (ilist2.size() > 0) {
-            for (Item i : ilist2) {
+    private void showTable(ArrayList<Item> ilist) {
+        if (ilist.size() > 0) {
+            for (Item i : ilist) {
                 {
                     addToTable(i);
                 }
             }
         }
     }
+    private class UpdateButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            System.exit(0);
+        }
+
+    }
+
+    private class AddItemButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            
+            }
+        }
 
     
+    private class DeleteButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource()==delete){
+                int row=table.getSelectedRow();
+                for (Item i : ilist) {
+                    if (i.getItemName() == (table.getValueAt(row, 1)).toString());
+                        ilist.remove(i);
+                    model.setRowCount(0);
+                    showTable(ilist);
+
+
+                try {
+
+                    Scanner pscan = new Scanner(new File(file));
+                    while (pscan.hasNext()) {
+                        String[] nextLine = pscan.nextLine().split(" ");
+                        if (nextLine[0].equals(i.getItemName())) {
+
+                        }
+                        pscan.close();
+                    }
+                }
+
+                catch (IOException IO) {
+                }
+            
+                }
+                
+        }
+
+    }
+    }
     private class CloseButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
@@ -149,6 +210,6 @@ public class Stock extends JPanel {
 
     }
    
+    }
 
 
-}
