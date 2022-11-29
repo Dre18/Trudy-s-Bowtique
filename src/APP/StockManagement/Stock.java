@@ -62,7 +62,6 @@ public class Stock extends JPanel {
        
         delete = new JButton("Delete");
         close = new JButton("Close");
-       
         update = new JButton("Update");
 
         
