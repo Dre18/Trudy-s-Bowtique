@@ -2,31 +2,28 @@ package APP.StockManagement;
 
 public class Item{
         private String name;
-        private int stockID;
+        private int quantity;
     
         
-        public Item(String name,int stockID) {
-            super();
+        public Item(String name, int quantity) {
+            
     
             this.name = name;
-            this.stockID = stockID;
+            this.quantity = quantity;
     
         }
     
-        public String getItem() {
+        public String getItemName() {
             return name;
         }
     
-        public int getStockID() {
-            return stockID;
+        public int getItemQuantity() {
+            return quantity;
         }
 
-    
-    
-        public String toString() {
-            String str = "";
-            return str;
-        }
+        public void changeQuantity(int x)
+                this.quantity -= x;
+       
     
         
         
