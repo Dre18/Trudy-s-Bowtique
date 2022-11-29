@@ -26,16 +26,16 @@ public class Stock extends JPanel {
     
     private JPanel pnlCommand;
     private JPanel pnlDisplay;
-    private ArrayList<Item> ilist;
+    private ArrayList<Stock> ilist;
     private JScrollPane scrollPane;
     private JTable table;
     private DefaultTableModel model;
     private JTextField Item;
     private JTextField Quantity;
-    private JTextField Total;
     private JButton delete;
     
-
+    private String item_name;
+    private int quantity;
   
     public Stock() {
         super(new GridLayout(2, 1));
@@ -44,17 +44,16 @@ public class Stock extends JPanel {
         // pnlDisplay.setBounds(150, 300, 15, 30);
         pnlDisplay.setBackground(Color.LIGHT_GRAY);
         ilist = loadStock("StockList.dat");
-        String[] columnNames = { "Items", "Quantity"};
+        String[] columnNames = { "Items", "Quantity", "Critical Level"};
         model = new DefaultTableModel(columnNames, 0);
         table = new JTable(model);
         showTable(ilist);
-        table.setPreferredScrollableViewportSize(new Dimension(500, ilist.size() * 15 + 50));
+        table.setPreferredScrollableViewportSize(new Dimension(50, ilist.size() * 15 + 50));
         table.setFillsViewportHeight(true);
         scrollPane = new JScrollPane(table);
         add(scrollPane);
         Item = new JTextField(10);
         Quantity = new JTextField(10);
-        Total = new JTextField(10);
         pnlDisplay.setLayout(new GridLayout(4, 0));
         pnlDisplay.add(new JLabel("New Item:"));
         pnlDisplay.add(Item);
@@ -75,15 +74,47 @@ public class Stock extends JPanel {
         add(pnlCommand);
 
     }
+    private ArrayList<Stock> loadStock(String pfile) {
+        Scanner pscan = null;
+        ArrayList<Stock> slist = new ArrayList<Stock>();
 
+        try {
+            pscan = new Scanner(new File(pfile));
+            while (pscan.hasNext()) {
+                String[] nextLine = pscan.nextLine().split(" ");
+                item_name = nextLine[0];
+                quantity = Integer.parseInt(nextLine[1]);
+                slist.add(this);
+
+            }
+
+            pscan.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "System Error");
+        }
+        return slist;
+    }
+
+   public void addItem(Stock I) {
+        ilist.add(I);
+        addToTable(I);
+
+    }
+
+    public int getItemQuantity(){
+        return 0;
+    }
+    
+    public String getItemName(){
+            return item_name;
+    }
     
     public void reduceStock(){
         
     }
-
-
-    public void addToStock(Item i) {
-        String[] item = { "" + i.getItem()};
+    
+    public void addToTable(Stock i) {
+        String[] item = { i.getItemName(), "" + i.getItemQuantity()};
         model.addRow(item);
     }
 
@@ -99,41 +130,17 @@ public class Stock extends JPanel {
     }
 
     
-    public void addItem(Item I) {
-        ilist.add(I);
-        addToStock(I);
-
-    }
+    
 
     
-    private ArrayList<Item> loadStock(String pfile) {
-        Scanner pscan = null;
-        ArrayList<Item> ilist = new ArrayList<Item>();
-
-        try {
-            pscan = new Scanner(new File(pfile));
-            while (pscan.hasNext()) {
-                String[] nextLine = pscan.nextLine().split(" ");
-                String name = nextLine[0];
-                int stockID = Integer.parseInt(nextLine[1]);
-                Item I = new Item(name,stockID);
-                ilist.add(I);
-
-            }
-
-            pscan.close();
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "System Error");
-        }
-        return ilist;
-    }
+    
 
     
-    private void showTable(ArrayList<Item> ilist) {
-        if (ilist.size() > 0) {
-            for (Item i : ilist) {
+    private void showTable(ArrayList<Stock> ilist2) {
+        if (ilist2.size() > 0) {
+            for (Stock i : ilist2) {
                 {
-                    addToStock(i);
+                    addToTable(i);
                 }
             }
         }

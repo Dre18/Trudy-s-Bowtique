@@ -4,16 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import APP.AuthenticationandAuthorization.UserAuth;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
-
-import javax.print.attribute.standard.MediaSize.Other;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 
 public class MainView extends JPanel {
@@ -68,13 +62,24 @@ public class MainView extends JPanel {
 }  
 
     private class StockButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent x) {
+            if (x.getSource() == Stock)
+            {
+                try{
+                    APP.StockManagement.Stock stock = new APP.StockManagement.Stock();
             
-            APP.StockManagement.Stock stock = new APP.StockManagement.Stock();
+                    stock.createAndShowGUI();
+                    // SystemDisplay newContentPane = new SystemDisplay();
+                    // newContentPane.setOpaque(false);
+
+                }
+                catch (Exception y)
+                {
+
+                }
+            }
             
-            stock.createAndShowGUI();
-            SystemDisplay newContentPane = new SystemDisplay();
-            newContentPane.setOpaque(false);
+            
             
             
         }
@@ -93,7 +98,7 @@ public class MainView extends JPanel {
                     newContentPane.setOpaque(false);
                     mainView.setOpaque(false);
                     frame.setTitle("Order");
-                    Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+                    // Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
                     frame.setResizable(true);
                     frame.pack();
                     frame.setVisible(true);

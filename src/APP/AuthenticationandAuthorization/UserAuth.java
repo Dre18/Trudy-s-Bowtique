@@ -1,8 +1,6 @@
 package APP.AuthenticationandAuthorization;
 
 import javax.swing.*;
-
-import APP.StockManagement.Stock;
 import APP.System_User_Interface.MainView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -56,22 +54,22 @@ public class UserAuth extends JFrame implements ActionListener {
             String pwdText;
             userText = userTF.getText();
             pwdText = String.valueOf(passwordField.getPassword());
-            String[] user = { "Admin Admin" };
+            //String[] user = { "Admin Admin" };
             int a = 0;
-            for (int i = 0; i < user.length; i++) {
-                String[] s = user[i].split(" ");
-                if (userText.equals(s[0]) && pwdText.equals(s[1])) {
+            //for (int i = 0; i < user.length; i++) {
+              //  String[] s = user[i].split(" ");
+               // if (userText.equals(s[0]) && pwdText.equals(s[1])) {
                 MainView mainView = new MainView();
                 
                 mainView.createAndShowGUI();
                     a = 1;
                     setVisible(false);
-                }
-            }
+               // }
+           // }
 
-            if (a == 0) {
-                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
-            }
+            // if (a == 0) {
+            //     JOptionPane.showMessageDialog(this, "Invalid Username or Password");
+            // }
         }
 
         if (e.getSource() == resetButton) {
@@ -82,8 +80,8 @@ public class UserAuth extends JFrame implements ActionListener {
         if (e.getSource() == showPassword) {
             if (showPassword.isSelected()) {
                 passwordField.setEchoChar((char) 0);
-                userTF.disable();
-                passwordField.disable();
+                // userTF.disable();
+                // passwordField.disable();
             } else {
                 passwordField.setEchoChar('*');
             }
