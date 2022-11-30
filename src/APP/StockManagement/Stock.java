@@ -24,6 +24,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import APP.System_User_Interface.MainView;
+
 public class Stock extends JPanel {
     
     private JButton close;
@@ -37,7 +39,7 @@ public class Stock extends JPanel {
     private JScrollPane scrollPane;
     private JTable table;
     private DefaultTableModel model;
-    private JTextField Item;
+    private JTextField item;
     private JTextField Quantity;
     private JPanel pnl;
    
@@ -61,11 +63,12 @@ public class Stock extends JPanel {
         table.setFillsViewportHeight(true);
         scrollPane = new JScrollPane(table);
         add(scrollPane);
-        Item = new JTextField(10);
+        item = new JTextField(10);
         Quantity = new JTextField(10);
         pnlDisplay.setLayout(new GridLayout(4, 0));
         pnlDisplay.add(new JLabel("New Item:"));
-        pnlDisplay.add(Item);
+       
+        item.setText("");
         pnlDisplay.add(new JLabel("Amount:"));
         pnlDisplay.add(Quantity);
         addItem = new JButton("Add Item");
@@ -105,11 +108,15 @@ public class Stock extends JPanel {
             pscan = new Scanner(new File(pfile));
             while (pscan.hasNext()) {
                 String[] nextLine = pscan.nextLine().split(" ");
+                if (nextLine[0]==" " ){
+                    continue;
+                }
+                else{
                 String name = nextLine[0];
                 int quantity = Integer.parseInt(nextLine[1]);
                  Item item = new Item(name, quantity);
                  ilist.add(item);
-
+                }
             }
 
             pscan.close();
@@ -150,6 +157,10 @@ public class Stock extends JPanel {
         frame.setVisible(true);
 
     }
+    public int createJOptionpane(String str){
+        int n = JOptionPane.showConfirmDialog(pnl, str,"Confirmation",JOptionPane.YES_NO_OPTION);
+        return n;
+    }
 
 
     
@@ -171,27 +182,64 @@ public class Stock extends JPanel {
 
     private class AddItemButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            
+            if (e.getSource()==addItem){
+                try{
+                if (item.getText().isEmpty()){
+                JOptionPane.showMessageDialog(pnl, "Incomplete Fields");
+                }
+                else{
+                    String new_item = item.getText().trim().replace(" ", "_");
+                    item.setText("");
+                    int item_quantity = Integer.parseInt(Quantity.getText().trim());
+                    Quantity.setText("");
+                    Item I = new Item(new_item, item_quantity);
+                    
+                        FileWriter fw = new FileWriter(file, true);
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        PrintWriter pw = new PrintWriter(bw);
+                        pw.println(I.getItemName() + " " + I.getItemQuantity());
+                        pw.close();
+                        bw.close();
+                        fw.close();
+                    }
+                }
+                catch (NumberFormatException n) {
+                    JOptionPane.showMessageDialog(pnl, "Quantity Invalid");
+                } catch (IOException f) {
+                    JOptionPane.showMessageDialog(pnl, "Something Went Wrong");
+                }
+                catch (Exception l) {
+                    JOptionPane.showMessageDialog(pnl,"Please Close Application\nIf problem persists");
+                }
+                model.setRowCount(0);
+                ilist=loadStock(file);
+                showTable(ilist);
+                
             }
         }
 
-    
+    }
     private class DeleteButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent a) {
             if (a.getSource()==delete){
                 int row = table.getSelectedRow();
                 String val ="";
-                for (Item i : ilist) {
-                    if (i.getItemName().equals(table.getValueAt(row, 0))){
-                        val=i.getItemName();
-                        removeRecord(val);
-                        ilist.remove(i);
-                        model.setRowCount(0);
-                        showTable(ilist);
-                        break;
-               
-                    }   
+
+
+               if (createJOptionpane("Are you sure you want to delete this item")==0){
+                    for (Item i : ilist) {
+                        if (i.getItemName().equals(table.getValueAt(row, 0))){
+                            val=i.getItemName();
+                            removeRecord(val);
+                            ilist.remove(i);
+                            model.setRowCount(0);
+                            showTable(ilist);
+                            break;
+                
+                        }   
+                    }
                 }
+
             }
         }
         public void removeRecord(String val){
@@ -232,11 +280,11 @@ public class Stock extends JPanel {
     }
     private class CloseButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.exit(0);
+              System.exit(ABORT);
         }
 
     }
    
-    }
+}
 
 
