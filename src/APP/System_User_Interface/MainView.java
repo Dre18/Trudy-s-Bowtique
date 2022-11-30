@@ -69,8 +69,8 @@ public class MainView extends JPanel {
                     APP.StockManagement.Stock stock = new APP.StockManagement.Stock();
             
                     stock.createAndShowGUI();
-                    // SystemDisplay newContentPane = new SystemDisplay();
-                    // newContentPane.setOpaque(false);
+                    SystemDisplay newContentPane = new SystemDisplay();
+                    newContentPane.setOpaque(false);
 
                 }
                 catch (Exception y)
@@ -95,7 +95,7 @@ public class MainView extends JPanel {
                     SystemDisplay newContentPane = new SystemDisplay();
                     MainView mainView = new MainView();
                     APP.OrderManagement.Order frame = new APP.OrderManagement.Order();
-                    newContentPane.setOpaque(false);
+                    newContentPane.setOpaque(true);
                     mainView.setOpaque(false);
                     frame.setTitle("Order");
                     // Dimension size = Toolkit.getDefaultToolkit().getScreenSize();

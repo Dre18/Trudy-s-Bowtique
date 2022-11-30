@@ -28,11 +28,9 @@ import APP.System_User_Interface.MainView;
 
 public class Stock extends JPanel {
     
-    private JButton close;
     private JButton update;
     private JButton addItem;
     private JButton delete;
-
     private JPanel pnlCommand;
     private JPanel pnlDisplay;
     private ArrayList<Item> ilist;
@@ -42,7 +40,6 @@ public class Stock extends JPanel {
     private JTextField item;
     private JTextField Quantity;
     private JPanel pnl;
-   
     private static final String file= "StockList.dat";
  
   
@@ -76,24 +73,14 @@ public class Stock extends JPanel {
         pnlDisplay.add(addItem);
 
         delete = new JButton("Delete Item");
-        close = new JButton("Close");
         update = new JButton("Update Item");
-        
-        
-        
-        
+
         update.addActionListener(new UpdateButtonListener());
         delete.addActionListener(new DeleteButtonListener());
-        close.addActionListener(new CloseButtonListener());
-         
-       
         update.setBackground(Color.ORANGE);
-        close.setBackground(Color.lightGray);
         delete.setBackground(Color.red);
-        
         pnlCommand.add(update, BorderLayout.CENTER);
         pnlCommand.add(delete, BorderLayout.CENTER);
-        pnlCommand.add(close, BorderLayout.CENTER);
         pnlCommand.add(pnlDisplay, BorderLayout.PAGE_START);
         add(pnlCommand);
 
@@ -175,8 +162,51 @@ public class Stock extends JPanel {
     }
     private class UpdateButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            System.exit(0);
-        }
+            if (e.getSource() == update)
+            {
+                try
+                {
+
+                    int irow = table.getSelectedRow();
+                if (item.getText().isEmpty() == false) {
+                    for (Item i : ilist) {
+                        if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
+                            Item  item = new Item(i.getItemName(), i.getItemQuantity());
+                            ilist.remove(i);
+                            ilist.add(item);
+                            model.setRowCount(0);
+                            showTable(ilist);
+                        }
+                    }
+                        
+                }
+
+                if (Quantity.getText().isEmpty() == false) {
+                    for (Item i : ilist) {
+                        if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
+                            Item item = new Item(i.getItemName(), i.getItemQuantity());
+                            ilist.remove(i);
+                            ilist.add(item);
+                            model.setRowCount(0);
+                            showTable(ilist);
+                        }
+    
+                    }
+                }
+                
+                }
+                catch (NumberFormatException n) {
+                    JOptionPane.showMessageDialog(pnl, "Quantity Invalid");
+                } catch (Exception l) {
+                    JOptionPane.showMessageDialog(pnl,"Please Close Application\nIf problem persists");
+                }
+                
+            }
+
+            
+
+
+         }
 
     }
 
@@ -278,12 +308,13 @@ public class Stock extends JPanel {
             }
         }
     }
-    private class CloseButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-              System.exit(ABORT);
-        }
+    // private class CloseButtonListener implements ActionListener {
+    //     public void actionPerformed(ActionEvent e) {
+    //         Stock stock = new Stock();
+    //         stock.setOpaque(true);
+    //     }
 
-    }
+    // }
    
 }
 
