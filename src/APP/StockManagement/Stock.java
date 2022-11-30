@@ -58,7 +58,6 @@ public class Stock extends JPanel {
         model = new DefaultTableModel(columnNames, 0);
         table = new JTable(model);
         showTable(ilist);
-       
         table.setPreferredScrollableViewportSize(new Dimension(50, ilist.size() * 15 + 50));
         table.setFillsViewportHeight(true);
         scrollPane = new JScrollPane(table);
@@ -67,8 +66,7 @@ public class Stock extends JPanel {
         Quantity = new JTextField(10);
         pnlDisplay.setLayout(new GridLayout(4, 0));
         pnlDisplay.add(new JLabel("New Item:"));
-       
-        item.setText("");
+        pnlDisplay.add(item);
         pnlDisplay.add(new JLabel("Amount:"));
         pnlDisplay.add(Quantity);
         addItem = new JButton("Add Item");
@@ -131,7 +129,9 @@ public class Stock extends JPanel {
         addToTable(I);
 
     }
-    
+    public ArrayList<Item> getItems(){
+        return ilist;
+    }
     public void reduceStock(String item_name, int c){
         //reduces the stock qauntity based on order made
         for (Item i: ilist){
