@@ -93,33 +93,33 @@ public class Stock extends JPanel {
 //         // filereader(Scanner file);
     
 
-        // Scanner pscan;
-        // try {
-        //     pscan = new Scanner(new File(file));
-        //     while (pscan.hasNext()) {
-        //         int sum = 0;
-        //         String[] nextLine = pscan.nextLine().split(" ");
-        //         if (nextLine[0].isEmpty() == false ){
-        //             // continue;
-        //             String name = nextLine[0];
-        //             int quantity = Integer.parseInt(nextLine[1]);
-        //             sum = sum + quantity;
-        //             Item item = new Item(name, sum);
-        //             ilist.add(item);
-        //             int a = quantity/2;
-        //             int d = quantity - sum;
-        //             if(d<= a)
-        //             {
-        //                APP.NotificationsandEvents.Notification n = new  Notification() ;
-        //             }
-        //         }
+        Scanner pscan;
+        try {
+            pscan = new Scanner(new File(file));
+            while (pscan.hasNext()) {
+                int sum = 0;
+                String[] nextLine = pscan.nextLine().split(" ");
+                if (nextLine[0].isEmpty() == false ){
+                    // continue;
+                    String name = nextLine[0];
+                    int quantity = Integer.parseInt(nextLine[1]);
+                    sum = sum + quantity;
+                    Item item = new Item(name, sum);
+                    ilist.add(item);
+                    int a = quantity/2;
+                    int d = quantity - sum;
+                    if(d<= a)
+                    {
+                       APP.NotificationsandEvents.Notification n = new  Notification() ;
+                    }
+                }
         
-        //     }
-        //     pscan.close();
-        // } catch (FileNotFoundException e) {
-        //     // TODO Auto-generated catch block
-        //     e.printStackTrace();
-        // }
+            }
+            pscan.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
             
         
     
