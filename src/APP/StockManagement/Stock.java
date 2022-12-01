@@ -204,51 +204,7 @@ public class Stock extends JPanel {
     }
 
 
-//     private class UpdateButtonListener implements ActionListener {
-//         public void actionPerformed(ActionEvent e) {
-//             if (e.getSource() == update)
-//             {
-//                 try
-//                 {
-                    
 
-//                     int irow = table.getSelectedRow();
-//                 if (item.getText().isEmpty() == false) {
-//                     for (Item i : ilist) {
-//                         if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
-//                             Item  item = new Item(i.getItemName(), i.getItemQuantity());
-//                             ilist.remove(i);
-//                             ilist.add(item);
-//                             model.setRowCount(0);
-//                             showTable(ilist);
-                            
-//                             FileReader File = new FileReader(new File(file));
-//                             BufferedReader br = new BufferedReader(File);
-//                             String temp = br.readLine();
-//                             while (temp != null) {
-//                             temp = br.readLine();
-//                             System.out.println(temp);
-
-//                             FileInputStream fis = new FileInputStream(file);
-//                             try(ObjectInputStream objectstream = new ObjectInputStream(fis)){
-
-//                                 objectstream.readObject();
-//                             }
-                       
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//             catch (NumberFormatException n) {
-//                 JOptionPane.showMessageDialog(pnl, "Quantity Invalid");
-//             } catch (Exception l) {
-//                 JOptionPane.showMessageDialog(pnl,"Please Close Application\nIf problem persists");
-//             }
-            
-//         }
-// }                    
-//     }
 
     private class UpdateButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -307,70 +263,8 @@ public class Stock extends JPanel {
                     
                 }
             }
-            //     try
-            //      {
-            //         int irow = table.getSelectedRow();
-            //     if (item.getText().isEmpty() == false) {
-            //         for (Item i : ilist) {
-            //             if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
-            //                 Item  item = new Item(i.getItemName(), i.getItemQuantity());
-            //                 ilist.remove(i);
-            //                 ilist.add(item);
-            //                 model.setRowCount(0);
-            //                 showTable(ilist);
-                            
-            //                 FileReader File = new FileReader(new File(file));
-            //                 BufferedReader br = new BufferedReader(File);
-            //                 String temp = br.readLine();
-            //                 while (temp != null) {
-            //                 temp = br.readLine();
-            //                 System.out.println(temp);
-
-            //                 FileInputStream fis = new FileInputStream(file);
-            //                 try(ObjectInputStream objectstream = new ObjectInputStream(fis)){
-
-            //                     objectstream.readObject();
-            //                 }
-                            
-            //         }
-                        
-                        
-                }
-                
-
-            }             
-                
-                  
-            //     JOptionPane.showMessageDialog(pnl, "Incomplete Fields");
-            //     }
-                
-            //         String new_item = item.getText().trim().replace(" ", "_");
-            //         item.setText("");
-            //         int item_quantity = Integer.parseInt(Quantity.getText().trim());
-            //         Quantity.setText("");
-            //         Item I = new Item(new_item, item_quantity);
-                    
-            //             FileWriter fw = new FileWriter(file, true);
-            //             BufferedWriter bw = new BufferedWriter(fw);
-            //             PrintWriter pw = new PrintWriter(bw);
-            //             pw.println(I.getItemName() + " " + I.getItemQuantity());
-            //             pw.close();
-            //             bw.close();
-            //             fw.close();
-                       
-                        
-                
-
-            //     if (Quantity.getText().isEmpty() == false) {
-            //         for (Item i : ilist) {
-            //             if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
-            //                 Item item = new Item(i.getItemName(), i.getItemQuantity());
-            //                 ilist.remove(i);
-            //                 ilist.add(item);
-            //                 model.setRowCount(0);
-            //                 showTable(ilist);
-            //             }
-    
+        }
+    }
     private class AddItemButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource()==addItem){
