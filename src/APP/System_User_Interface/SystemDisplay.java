@@ -99,6 +99,7 @@ public class SystemDisplay extends JPanel {
                     frame.setResizable(true);
                     frame.pack();
                     frame.setVisible(true);
+                    newContentPane.setVisible(false);
 
                 } catch (Exception d) {
 
@@ -109,6 +110,8 @@ public class SystemDisplay extends JPanel {
         }
 
     }
+
+    
 
 
    

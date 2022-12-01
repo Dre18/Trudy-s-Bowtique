@@ -96,10 +96,10 @@ public class Order extends JFrame implements ActionListener{
 			Options = new JMenu("Option");
 			addRecord = new JMenuItem("New Order");
 			editRecord = new JMenu("Edit Order");
-				editRecord.add(savetable);
-				editRecord.add(editDescrp);
-				editRecord.add(editPhonenum);
-				editRecord.add(editCost);
+            editRecord.add(savetable);
+            editRecord.add(editDescrp);
+            editRecord.add(editPhonenum);
+            editRecord.add(editCost);
 			delRecord = new JMenuItem("Remove Order");
         	Options.add(addRecord);
 			Options.add(editRecord);
@@ -111,41 +111,42 @@ public class Order extends JFrame implements ActionListener{
             addRecord.addActionListener(this);
 			editRecord.addActionListener(this);
 			delRecord.addActionListener(this);
-        this.setJMenuBar(optionBar);
-        this.add(toppanel, BorderLayout.CENTER); 
-                // f.setSize(400,400);    
-                // f.setLayout(null);  
-                 Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
-                    int width = size.width;
-                    int height = size.height;
-                    this.setSize(width, height);
-                    this.setLocationRelativeTo(null);  
-                this.setVisible(true);
-                orderList = loadItems(file);
-                String[] columnNames = { "Order No.", "Customer's Name", "Status of Order", "DeadLine" };
-                model = new DefaultTableModel(columnNames, 0);
-                table = new JTable(model);
-                showTable(orderList);
-                table.setPreferredScrollableViewportSize(new Dimension(500, orderList.size() * 15 + 50));
-                table.setFillsViewportHeight(true);
-                scrollPane = new JScrollPane(table);
-                toppanel.add(scrollPane);
-                toppanel.add(detailspanel); 
-                detailspanel.setMargin(new InsetsUIResource(20, 20, 20, 20));
-				detailspanel.setFont(new Font("Arial", Font.PLAIN, 20));
-				detailspanel.setBackground(Color.WHITE);
-                detailspanel.setText("Click on an order to see its details displayed here.");
-				detailspanel.setEditable(false);
-                table.addMouseListener(new MouseAdapter() {
-                    public void mouseClicked(MouseEvent e) {
-                        Point point = e.getPoint();
-                        int row = table.rowAtPoint(point);
-                        String str = table.getValueAt(row, 0).toString();
+            this.setJMenuBar(optionBar);
+            this.add(toppanel, BorderLayout.CENTER); 
+               
+            Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
+            int width = size.width;
+            int height = size.height;
+            this.setSize(width, height);
+            this.setLocationRelativeTo(null);  
+            this.setVisible(true);
+            orderList = loadItems(file);
+            String[] columnNames = { "Order No.", "Customer's Name", "Status of Order", "DeadLine" };
+            model = new DefaultTableModel(columnNames, 0);
+            table = new JTable(model);
+            showTable(orderList);
+            table.setPreferredScrollableViewportSize(new Dimension(500, orderList.size() * 15 + 50));
+            table.setFillsViewportHeight(true);
+            scrollPane = new JScrollPane(table);
+            toppanel.add(scrollPane);
+            toppanel.add(detailspanel); 
+            detailspanel.setMargin(new InsetsUIResource(20, 20, 20, 20));
+            detailspanel.setFont(new Font("Arial", Font.PLAIN, 20));
+            detailspanel.setBackground(Color.WHITE);
+            detailspanel.setText("Click on an order to see its details displayed here.");
+            detailspanel.setEditable(false);
 
-                        detailspanel.setText(DisplayDetails(file, str));
+            
+            table.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    Point point = e.getPoint();
+                    int row = table.rowAtPoint(point);
+                    String str = table.getValueAt(row, 0).toString();
 
-                    }
-                }); 
+                    detailspanel.setText(DisplayDetails(file, str));
+
+                }
+            }); 
     }
   
 	public String DisplayDetails(String pfile, String val){
@@ -177,7 +178,7 @@ public class Order extends JFrame implements ActionListener{
 
             pscan.close();
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "System Error");
+            JOptionPane.showMessageDialog(this, "System Error Restart application");
         }
         return str;
     }
@@ -207,7 +208,7 @@ public class Order extends JFrame implements ActionListener{
 
             pscan.close();
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "System Error");
+            JOptionPane.showMessageDialog(this, "System Error Restart application");
         }
         return orderList;
     }
@@ -287,29 +288,16 @@ private class Orderpanel extends JFrame implements ActionListener{
     private JTextField tname;
     private JLabel mobile;
     private JTextField t_mob;
-
     private JLabel Descrp;
     private JTextArea t_Descrp;
-
     private JLabel cost;
     private JTextField t_cost;
-
     private JLabel dline;
     private JTextField t_dline;
-
-    private JLabel gender;
-    private JRadioButton male;
-    private JRadioButton female;
-    private ButtonGroup gengp;
-    private JLabel dob;
-
     private JLabel add;
     private JTextArea tadd;
-    private JCheckBox term;
-    private JButton sub;
     private JButton Done;
-    private JCheckBox tout;
-    private JLabel res;
+  
     private JTextArea resadd;
  
 

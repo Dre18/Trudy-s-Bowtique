@@ -73,7 +73,7 @@ public class MainView extends JPanel {
            catch (Exception n)
            {
         
-            // JOptionPane.showInternalMessageDialog(this, "System Error");
+            
            }
                 
             }
@@ -98,10 +98,7 @@ public class MainView extends JPanel {
                 {
 
                 }
-            }
-            
-            
-            
+            } 
             
         }
 

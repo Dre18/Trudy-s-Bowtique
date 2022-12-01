@@ -52,7 +52,6 @@ public class Stock extends JPanel {
         pnl=this;
         pnlCommand = new JPanel();
         pnlDisplay = new JPanel();
-        // pnlDisplay.setBounds(150, 300, 15, 30);
         pnlDisplay.setBackground(Color.LIGHT_GRAY);
         ilist = loadStock(file);
         String[] columnNames = { "Items", "Quantity"};
@@ -88,43 +87,36 @@ public class Stock extends JPanel {
         pnlCommand.add(pnlDisplay, BorderLayout.PAGE_START);
         add(pnlCommand);
 
-//         if((Quantity.getText().isEmpty() == false))
-//         {
-//         // filereader(Scanner file);
     
 
-        Scanner pscan;
-        try {
-            pscan = new Scanner(new File(file));
-            while (pscan.hasNext()) {
-                int sum = 0;
-                String[] nextLine = pscan.nextLine().split(" ");
-                if (nextLine[0].isEmpty() == false ){
-                    // continue;
-                    String name = nextLine[0];
-                    int quantity = Integer.parseInt(nextLine[1]);
-                    sum = sum + quantity;
-                    Item item = new Item(name, sum);
-                    ilist.add(item);
-                    int a = quantity/2;
-                    int d = quantity - sum;
-                    if(d<= a)
-                    {
-                       APP.NotificationsandEvents.Notification n = new  Notification() ;
-                    }
-                }
+        // int quantity = 0;
+        // Scanner pscan;
+        // try {
+        //     pscan = new Scanner(new File(file));
+        //     while (pscan.hasNext()) {
+        //         int sum = 0;
+        //         String[] nextLine = pscan.nextLine().split(" ");
+        //         if (nextLine[0].isEmpty() == false ){
+        //             // continue;
+        //             String name = nextLine[0];
+        //             quantity += Integer.parseInt(nextLine[1]);
+        //             sum = sum + quantity;
+        //             Item item = new Item(name, sum);
+        //             ilist.add(item);
+        //             int a = quantity/2;
+        //             int d = quantity - sum;
+        //             if(d<= a)
+        //             {
+        //                APP.NotificationsandEvents.Notification n = new  Notification() ;
+        //             }
+        //         }
         
-            }
-            pscan.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-            
-        
-    
-
-// }
+        //     }
+        //     pscan.close();
+        // } catch (FileNotFoundException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
 
 }
     private ArrayList<Item> loadStock(String pfile){
@@ -148,7 +140,7 @@ public class Stock extends JPanel {
 
             pscan.close();
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(this, "System Error");
+            JOptionPane.showMessageDialog(this, "System Error Unable to load items");
         }
         return ilist;
     }
@@ -204,51 +196,7 @@ public class Stock extends JPanel {
     }
 
 
-//     private class UpdateButtonListener implements ActionListener {
-//         public void actionPerformed(ActionEvent e) {
-//             if (e.getSource() == update)
-//             {
-//                 try
-//                 {
-                    
 
-//                     int irow = table.getSelectedRow();
-//                 if (item.getText().isEmpty() == false) {
-//                     for (Item i : ilist) {
-//                         if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
-//                             Item  item = new Item(i.getItemName(), i.getItemQuantity());
-//                             ilist.remove(i);
-//                             ilist.add(item);
-//                             model.setRowCount(0);
-//                             showTable(ilist);
-                            
-//                             FileReader File = new FileReader(new File(file));
-//                             BufferedReader br = new BufferedReader(File);
-//                             String temp = br.readLine();
-//                             while (temp != null) {
-//                             temp = br.readLine();
-//                             System.out.println(temp);
-
-//                             FileInputStream fis = new FileInputStream(file);
-//                             try(ObjectInputStream objectstream = new ObjectInputStream(fis)){
-
-//                                 objectstream.readObject();
-//                             }
-                       
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//             catch (NumberFormatException n) {
-//                 JOptionPane.showMessageDialog(pnl, "Quantity Invalid");
-//             } catch (Exception l) {
-//                 JOptionPane.showMessageDialog(pnl,"Please Close Application\nIf problem persists");
-//             }
-            
-//         }
-// }                    
-//     }
 
     private class UpdateButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -301,75 +249,23 @@ public class Stock extends JPanel {
                             newfile.renameTo(temp);
                         }
             
-                        catch (IOException IO) {
+                        catch (IOException IO) 
+                        {
+                            JOptionPane.showInputDialog(this, "Incorrect fields");
                         }
                     }
                     
                 }
             }
-            //     try
-            //      {
-            //         int irow = table.getSelectedRow();
-            //     if (item.getText().isEmpty() == false) {
-            //         for (Item i : ilist) {
-            //             if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
-            //                 Item  item = new Item(i.getItemName(), i.getItemQuantity());
-            //                 ilist.remove(i);
-            //                 ilist.add(item);
-            //                 model.setRowCount(0);
-            //                 showTable(ilist);
-                            
-            //                 FileReader File = new FileReader(new File(file));
-            //                 BufferedReader br = new BufferedReader(File);
-            //                 String temp = br.readLine();
-            //                 while (temp != null) {
-            //                 temp = br.readLine();
-            //                 System.out.println(temp);
-
-            //                 FileInputStream fis = new FileInputStream(file);
-            //                 try(ObjectInputStream objectstream = new ObjectInputStream(fis)){
-
-            //                     objectstream.readObject();
-            //                 }
-                            
-            //         }
+     
                         
-                        
-                }
+        }
                 
 
-            }             
+    }             
                 
                   
-            //     JOptionPane.showMessageDialog(pnl, "Incomplete Fields");
-            //     }
-                
-            //         String new_item = item.getText().trim().replace(" ", "_");
-            //         item.setText("");
-            //         int item_quantity = Integer.parseInt(Quantity.getText().trim());
-            //         Quantity.setText("");
-            //         Item I = new Item(new_item, item_quantity);
-                    
-            //             FileWriter fw = new FileWriter(file, true);
-            //             BufferedWriter bw = new BufferedWriter(fw);
-            //             PrintWriter pw = new PrintWriter(bw);
-            //             pw.println(I.getItemName() + " " + I.getItemQuantity());
-            //             pw.close();
-            //             bw.close();
-            //             fw.close();
-                       
-                        
-                
 
-            //     if (Quantity.getText().isEmpty() == false) {
-            //         for (Item i : ilist) {
-            //             if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
-            //                 Item item = new Item(i.getItemName(), i.getItemQuantity());
-            //                 ilist.remove(i);
-            //                 ilist.add(item);
-            //                 model.setRowCount(0);
-            //                 showTable(ilist);
-            //             }
     
     private class AddItemButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {

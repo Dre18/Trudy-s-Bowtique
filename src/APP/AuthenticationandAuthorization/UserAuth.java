@@ -2,6 +2,8 @@ package APP.AuthenticationandAuthorization;
 
 import javax.swing.*;
 import APP.System_User_Interface.MainView;
+import APP.System_User_Interface.SystemDisplay;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,22 +56,23 @@ public class UserAuth extends JFrame implements ActionListener {
             String pwdText;
             userText = userTF.getText();
             pwdText = String.valueOf(passwordField.getPassword());
-            //String[] user = { "Admin Admin" };
-            int a = 1;
-            //for (int i = 0; i < user.length; i++) {
-              //  String[] s = user[i].split(" ");
-               // if (userText.equals(s[0]) && pwdText.equals(s[1])) {
+           String[] user = { "Admin Admin" };
+            int a = 0;
+            for (int i = 0; i < user.length; i++) {
+               String[] s = user[i].split(" ");
+               if (userText.equals(s[0]) && pwdText.equals(s[1])) {
                 MainView mainView = new MainView();
+
                 
                 mainView.createAndShowGUI();
                     a = 1;
                     setVisible(false);
-               // }
-           // }
+               }
+           }
 
-            // if (a == 0) {
-            //     JOptionPane.showMessageDialog(this, "Invalid Username or Password");
-            // }
+            if (a == 0) {
+                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
+            }
         }
 
         if (e.getSource() == DoneButton) {

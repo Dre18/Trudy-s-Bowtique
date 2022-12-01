@@ -13,12 +13,12 @@ public class SalesReportGenerator {
 	private static String OI;
 	private static String Comments;
 	private static String Status;
-	private static int numm  = 1;
+	private static int numm  = 0;
 	private static int count=0;
 	
 	
 	public static void getInfo() {
-		numm++;
+		// numm++;
 		
 		String temp=Integer.toString(numm);
 		try {
@@ -33,7 +33,6 @@ public class SalesReportGenerator {
 	  		FileWriter myWriter = new FileWriter("SalesReport"+temp+".doc");//Will use to write to file
 			String l = "                   ********MONTHLY REPORT******* \n";
 	  		myWriter.write(l);
-			//new SalesReportGenerator().save("SalesReport"+temp+".pdf");
 			while (mReader.hasNextLine()) {
 				
 	    		String [] mdata = mReader.nextLine().split(" ");
@@ -49,16 +48,16 @@ public class SalesReportGenerator {
 	    			count++;
 					
 	    			String num=Integer.toString(count);
-	    			String txt = "Sale #: "+num+" Order #: "+ordnum+" by: "+ name + " " + "Purchase: "+ descrip +" Cost: " + cost +"\n\n";
+	    			String txt = "Sales #: "+num+ "\n"+"Order #: "+ordnum+" by: "+ name + " " + "Purchase: "+ descrip +" Cost: " + cost +"\n\n";
 					int cost2 = Integer.parseInt(cost.replace("$", ""));
 					
 					
 	    			myWriter.write(txt);
 					
 					int totalCost2 = cost2;
-	    		// }
-	    		myWriter.write("Total Monthly Sale: " + totalCost2 );
-	    		// APP.NotificationsandEvents.Notification;
+	    		
+	    		myWriter.write("\nTotal Monthly Sale: " + totalCost2 + "\n" );
+	    		
 	  		}
 	  		
 	  		
@@ -77,7 +76,7 @@ public class SalesReportGenerator {
 		}
 		catch (Exception o) {
 			System.out.println(o.getMessage());
-			// e.printStackTrace();
+		
 	  
 	  }
     }
