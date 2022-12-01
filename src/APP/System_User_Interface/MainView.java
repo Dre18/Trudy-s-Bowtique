@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import APP.MonthlysalesReporting.SalesReportGenerator;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

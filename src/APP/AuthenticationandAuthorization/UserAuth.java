@@ -1,9 +1,6 @@
 package APP.AuthenticationandAuthorization;
-
 import javax.swing.*;
 import APP.System_User_Interface.MainView;
-import APP.System_User_Interface.SystemDisplay;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

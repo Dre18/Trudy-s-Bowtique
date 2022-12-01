@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,8 +25,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
-import APP.NotificationsandEvents.Notification;
-import APP.System_User_Interface.MainView;
+
 
 public class Stock extends JPanel {
     

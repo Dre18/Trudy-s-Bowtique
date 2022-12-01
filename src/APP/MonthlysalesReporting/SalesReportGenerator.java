@@ -15,10 +15,12 @@ public class SalesReportGenerator {
 	private static String Status;
 	private static int numm  = 0;
 	private static int count=0;
+
 	
 	
 	public static void getInfo() {
-		// numm++;
+		numm++;
+		int totalCost2 = 0;
 		
 		String temp=Integer.toString(numm);
 		try {
@@ -50,17 +52,21 @@ public class SalesReportGenerator {
 	    			String num=Integer.toString(count);
 	    			String txt = "Sales #: "+num+ "\n"+"Order #: "+ordnum+" by: "+ name + " " + "Purchase: "+ descrip +" Cost: " + cost +"\n\n";
 					int cost2 = Integer.parseInt(cost.replace("$", ""));
+					status = status.strip();
+					if(status == "Completed")
+					{
+						myWriter.write(txt);
+
+					}
+	    			
 					
-					
-	    			myWriter.write(txt);
-					
-					int totalCost2 = cost2;
+					totalCost2 += cost2;
 	    		
-	    		myWriter.write("\nTotal Monthly Sale: " + totalCost2 + "\n" );
 	    		
 	  		}
 	  		
-	  		
+	  		myWriter.write("\nTotal Monthly Sale: " + totalCost2 + "\n" );
+	    		
 			myWriter.flush();
 	  		mReader.close();
 	  		mWriter.close();

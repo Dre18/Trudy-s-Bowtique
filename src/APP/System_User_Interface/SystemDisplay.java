@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import APP.AuthenticationandAuthorization.UserAuth;
+import APP.NotificationsandEvents.DLineAlert;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
@@ -24,6 +26,7 @@ public class SystemDisplay extends JPanel {
     public JButton logIn;
     private JTable table;
     private Color panelColor;
+    static int a,b,c;
 
     public static void main(String[] args) {
 
@@ -48,7 +51,12 @@ public class SystemDisplay extends JPanel {
                     JOptionPane.showInputDialog("System Error");
 
                 }
+                DLineAlert datess= new DLineAlert();
+                datess.setDate(a,b,c);
+                datess.addDate(a,b,c);
                 
+                // System.out.println(datess.CompareDate(date));
+
                 }
         });
     }
