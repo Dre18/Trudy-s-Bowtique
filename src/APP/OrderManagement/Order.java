@@ -581,7 +581,6 @@ private class Comp implements Comparator<OrdItem>
 {
     @Override
     public int compare(OrdItem o1, OrdItem o2) {
-        // TODO Auto-generated method stub
         return o1.getOrdnum()- (o2.getOrdnum());
     }
 }
@@ -597,20 +596,25 @@ private class CompD3 implements Comparator<OrdItem>
 {
     @Override
     public int compare(OrdItem o1, OrdItem o2) {
-        // TODO Auto-generated method stub
 		
 		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
 		Date date1;
 		Date date2;
-		int n;
+		int n=0;
 		
-			// date1= f.parse(o1.getDeadline());
+		try {
+				date1= f.parse(o1.getDeadline());
 		
-			// date2=f.parse(o2.getDeadline());
-
-		return 0;	
+			    date2=f.parse(o2.getDeadline());
+				n = (date1.compareTo((date2)));
+			
+		} 
+	 
+		catch (ParseException e) {
+			e.printStackTrace();
+		}	
 		
-		//return date1.compareTo((date2));
+		return n;
     }
 }
 }
