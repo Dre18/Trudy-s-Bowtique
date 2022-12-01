@@ -2,6 +2,8 @@ package APP.MonthlysalesReporting;
 import java.io.*;
 import java.util.Scanner;
 
+import javax.swing.text.Document;
+
 public class SalesReportGenerator {
 	private static String ON;
 	private static String LN;
@@ -20,10 +22,11 @@ public class SalesReportGenerator {
 		String temp=Integer.toString(numm);
 		try {
 	  		Scanner mReader = new Scanner(new File("OrderList.dat"));//Takes the name of the file that has all the orders,waiting on file to be built in orders class 
-	  		Scanner mWriter = new Scanner(new File("SalesReport.txt"));//Creates new file which will only have the sales
-	  		FileWriter myWriter = new FileWriter("SalesReport"+temp+".txt");//Will use to write to file
+	  		Scanner mWriter = new Scanner(new File("SalesReport.doc"));//Creates new file which will only have the sales
+	  		FileWriter myWriter = new FileWriter("SalesReport"+temp+".doc");//Will use to write to file
 	  		myWriter.write("********MONTHLY REPORT******* \n");
-	  		while (mReader.hasNextLine()) {
+	  		
+			while (mReader.hasNextLine()) {
 	    		String [] mdata = mReader.nextLine().split("-");
 	    		ON = mdata[0];
 	    		LN = mdata[1];
@@ -40,7 +43,7 @@ public class SalesReportGenerator {
 	    			myWriter.write(txt);
 	    		}
 	    		
-	    		
+	    		// APP.NotificationsandEvents.Notification;
 	  		}
 	  		//System.out.println(mdata);
 	  		

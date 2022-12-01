@@ -64,6 +64,7 @@ public class MainView extends JPanel {
         {
            try{
             APP.MonthlysalesReporting.SalesReportGenerator.getInfo();
+            JOptionPane.showInputDialog(this,"SalesReport saved");
            }
            catch (Exception n)
            {
