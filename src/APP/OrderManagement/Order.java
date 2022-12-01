@@ -16,13 +16,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.ViewportLayout;
+
 import javax.swing.plaf.ColorChooserUI;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.table.DefaultTableModel;
@@ -30,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 import APP.StockManagement.Stock;
 
 import javax.swing.*;
-import javax.swing.JLabel;
+
 import java.awt.*;    
 import java.awt.event.*;
 
@@ -47,7 +41,11 @@ public class Order extends JFrame implements ActionListener{
     private JMenuBar optionBar;
 	private String details;
 	JMenuItem addRecord;
-	JMenuItem editRecord;
+	JMenu editRecord;
+	JMenuItem savetable;
+	JMenuItem editDescrp;
+	JMenuItem editCost;
+	JMenuItem editPhonenum;
 	JMenuItem delRecord;
 	JMenu Options;
     JMenu sortRecord;
@@ -73,9 +71,23 @@ public class Order extends JFrame implements ActionListener{
         
         	sortRecord = new JMenu("Sort By ");
             sortByOrdNum = new JMenuItem("Order Number");
+			sortByOrdNum.addActionListener(this);
             sortByDeadline = new JMenuItem("Deadline");
+			sortByDeadline.addActionListener(this);
             sortByCompleted = new JMenuItem("Completed Order(s)");
+			sortByCompleted.addActionListener(this);
             sortByIncomplete = new JMenuItem("Incomplete Order(s)");
+			sortByIncomplete.addActionListener(this);
+
+            savetable = new JMenuItem("Save table changes");
+			savetable.addActionListener(this);
+			editDescrp = new JMenuItem("Edit Order Description");
+			editDescrp.addActionListener(this);
+			editPhonenum = new JMenuItem("Edit Phone number");
+			editPhonenum.addActionListener(this);
+			editCost = new JMenuItem("Edit the cost of an order");
+			editCost.addActionListener(this);
+
 
 			sortRecord.add(sortByOrdNum);
 			sortRecord.add(sortByDeadline);
@@ -83,7 +95,11 @@ public class Order extends JFrame implements ActionListener{
 			sortRecord.add(sortByIncomplete);
 			Options = new JMenu("Option");
 			addRecord = new JMenuItem("New Order");
-			editRecord = new JMenuItem("Edit Order");
+			editRecord = new JMenu("Edit Order");
+				editRecord.add(savetable);
+				editRecord.add(editDescrp);
+				editRecord.add(editPhonenum);
+				editRecord.add(editCost);
 			delRecord = new JMenuItem("Remove Order");
         	Options.add(addRecord);
 			Options.add(editRecord);
@@ -91,7 +107,7 @@ public class Order extends JFrame implements ActionListener{
             optionBar.add(Options);
 			optionBar.add(sortRecord);
 
-			sortRecord.addActionListener(this);
+			
             addRecord.addActionListener(this);
 			editRecord.addActionListener(this);
 			delRecord.addActionListener(this);
@@ -119,6 +135,7 @@ public class Order extends JFrame implements ActionListener{
 				detailspanel.setFont(new Font("Arial", Font.PLAIN, 20));
 				detailspanel.setBackground(Color.WHITE);
                 detailspanel.setText("Click on an order to see its details displayed here.");
+				detailspanel.setEditable(false);
                 table.addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
                         Point point = e.getPoint();
@@ -151,9 +168,9 @@ public class Order extends JFrame implements ActionListener{
 					String descrip = nextLine[6].replace("_"," ").replace("~","\n\t    ");
 					String cost = nextLine[7]; 
 				             
-				str = "Order No.: " + ordnum +"\nCustomer:  "+ name+ "  Phone number: " +phonenum+"\n Adrress: "+ addr+ "\n Deadline: " +date +"   Status of Order: "+ status +
-				"\n Order Description: "+descrip +"\n Total Cost: "+ cost ;
-				// getDetails(str);
+				str = "Order No. : " + ordnum +"\n\nCustomer:  "+ name+ "           Phone number: " +phonenum+"\n\n Adrress: "+ addr+ "\n\n Deadline: " +date +"          Status of Order: "+ status +
+				"\n\n Order Description: "+descrip +"\n\n Total Cost: "+ cost ;
+				
 			}
           
             }
@@ -285,9 +302,7 @@ private class Orderpanel extends JFrame implements ActionListener{
     private JRadioButton female;
     private ButtonGroup gengp;
     private JLabel dob;
-    private JComboBox date;
-    private JComboBox month;
-    private JComboBox year;
+
     private JLabel add;
     private JTextArea tadd;
     private JCheckBox term;
@@ -401,7 +416,7 @@ private class Orderpanel extends JFrame implements ActionListener{
         JLabel res  = new JLabel("reduce stock by");
         res.setFont(new Font("Arial", Font.PLAIN, 20));
         res.setSize(300, 25);
-        res.setLocation(100, 100);
+        res.setLocation(10, 100);
         d.add(res);
 
  
@@ -462,7 +477,7 @@ public void actionPerformed(ActionEvent e) {
 	if (e.getSource()==delRecord){
 		int row = table.getSelectedRow();
 		String val ="";
-
+    
 
 	   if (createJOptionpane("Are you sure you want to delete this item")==0){
 			for (OrdItem i : orderList) {
@@ -479,6 +494,63 @@ public void actionPerformed(ActionEvent e) {
 		}
 
 	}
+	if (e.getSource()==savetable){
+		if  ( table.isEditing() )
+		{
+			String val;
+			int row = table.getEditingRow();
+			int col = table.getEditingColumn();
+			table.getCellEditor(row, col).stopCellEditing();
+			int count= table.getRowCount();
+			int num=0;
+			for (OrdItem i: orderList){
+			
+				val= table.getValueAt(row,col).toString();
+				String tempfile = "temp.dat";
+				String currentline;
+				File oldfile= new File(file);
+				File newfile = new File(tempfile);
+				try {
+					FileWriter fw = new FileWriter(tempfile, true);
+					BufferedWriter bw = new BufferedWriter(fw);
+					PrintWriter pw = new PrintWriter(bw);
+	
+					FileReader fr = new FileReader(file);
+					BufferedReader br = new BufferedReader(fr);
+					
+					while ((currentline =br.readLine()) != null) {
+						String[] data = currentline.split(" ");
+						
+						if (!(num==row)) {
+							 pw.println(currentline);
+						}
+						else{
+							data[col]=val;
+							String txt= data[0]+" "+data[1].replace(" ", "_")+ " "+data[2]+ " "+data[3]+" "+data[4]+" "+data[5]+" "+ data[6]+" "+data[7];
+							pw.println(txt);
+						}
+						num++;
+						
+					}
+					pw.flush();
+					pw.close();
+					br.close();
+					fr.close();
+					fw.close();
+					bw.close();
+	
+					oldfile.delete();
+					File temp = new File(file);
+					newfile.renameTo(temp);
+				}
+	
+				catch (IOException IO) {
+				}
+			}
+			
+		}
+	}
+	
 
 
 	
