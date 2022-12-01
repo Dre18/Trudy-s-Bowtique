@@ -1,7 +1,9 @@
 package APP.OrderManagement;
 import java.awt.LayoutManager;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,7 +45,7 @@ public class Order extends JFrame implements ActionListener{
     private static final String file= "OrderList.dat";
     private ArrayList<OrdItem> orderList;
     private JMenuBar optionBar;
-	
+	private String details;
 	JMenuItem addRecord;
 	JMenuItem editRecord;
 	JMenuItem delRecord;
@@ -114,16 +116,53 @@ public class Order extends JFrame implements ActionListener{
                 toppanel.add(scrollPane);
                 toppanel.add(detailspanel); 
                 detailspanel.setMargin(new InsetsUIResource(20, 20, 20, 20));
+				detailspanel.setFont(new Font("Arial", Font.PLAIN, 20));
+				detailspanel.setBackground(Color.WHITE);
                 detailspanel.setText("Click on an order to see its details displayed here.");
                 table.addMouseListener(new MouseAdapter() {
                     public void mouseClicked(MouseEvent e) {
                         Point point = e.getPoint();
                         int row = table.rowAtPoint(point);
                         String str = table.getValueAt(row, 0).toString();
-                        detailspanel.setText(str);
+
+                        detailspanel.setText(DisplayDetails(file, str));
 
                     }
                 }); 
+    }
+  
+	public String DisplayDetails(String pfile, String val){
+
+		Scanner pscan = null;
+        String str="";
+
+        try {
+            pscan = new Scanner(new File(pfile));
+            while (pscan.hasNext()) {
+                String data=pscan.nextLine();
+                String[] nextLine = data.split(" ");
+                String ordnum = nextLine[0];
+				if (ordnum.equals(val)){
+					String name = nextLine[1].replace("_"," ");
+					String status = nextLine[2];
+					String date = nextLine[3];
+					String phonenum=nextLine[4];
+					String addr = nextLine[5].replace("_"," ").replace("~","\n\t    ");
+					String descrip = nextLine[6].replace("_"," ").replace("~","\n\t    ");
+					String cost = nextLine[7]; 
+				             
+				str = "Order No.: " + ordnum +"\nCustomer:  "+ name+ "  Phone number: " +phonenum+"\n Adrress: "+ addr+ "\n Deadline: " +date +"   Status of Order: "+ status +
+				"\n Order Description: "+descrip +"\n Total Cost: "+ cost ;
+				// getDetails(str);
+			}
+          
+            }
+
+            pscan.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "System Error");
+        }
+        return str;
     }
 
     public ArrayList<OrdItem> loadItems(String pfile){
@@ -182,7 +221,46 @@ public void createAndShowGUI() {
 		f.setVisible(true);
 
 }
+public int createJOptionpane(String str){
+	int n = JOptionPane.showConfirmDialog(this, str,"Confirmation",JOptionPane.YES_NO_OPTION);
+	return n;
+}
 
+public void removeRecord(String val){
+	String tempfile = "temp.dat";
+	String currentline;
+	File oldfile= new File(file);
+	File newfile = new File(tempfile);
+	try {
+		FileWriter fw = new FileWriter(tempfile, true);
+		BufferedWriter bw = new BufferedWriter(fw);
+		PrintWriter pw = new PrintWriter(bw);
+
+		FileReader fr = new FileReader(file);
+		BufferedReader br = new BufferedReader(fr);
+		
+		while ((currentline =br.readLine()) != null) {
+			String[] data = currentline.split(" ");
+			if (!(data[0].equals(val))) {
+				 pw.println(currentline);
+			}
+			
+		}
+		pw.flush();
+		pw.close();
+		br.close();
+		fr.close();
+		fw.close();
+		bw.close();
+
+		oldfile.delete();
+		File temp = new File(file);
+		newfile.renameTo(temp);
+	}
+
+	catch (IOException IO) {
+	}
+}
 private class Orderpanel extends JFrame implements ActionListener{
      
     // Components of the Form
@@ -354,7 +432,7 @@ private class Orderpanel extends JFrame implements ActionListener{
                     PrintWriter w = new PrintWriter(b);
 					OrdItem o = new OrdItem(tname.getText(), t_dline.getText(), tadd.getText(), t_Descrp.getText(), t_mob.getText(), t_cost.getText());
                     w.println(o.getOrdnum() + " " + o.getName().replace(" ", "_") + " " + o.getStatus_2() + " "
-                            + o.getDeadline() + " " +o.getPhonenum()+" "+ o.getAddr().replace(" ", "_").replace("\n", "_") + " " + o.getOrdDescrip().replace(" ","_").replace("\n", "_") + " " + o.getCost());
+                            + o.getDeadline() + " " +o.getPhonenum()+" "+ o.getAddr().replace(" ", "_").replace("\n", "~") + " " + o.getOrdDescrip().replace(" ","_").replace("\n", "~") + " " + o.getCost());
                     
 					w.flush();
 					w.close();
@@ -362,7 +440,7 @@ private class Orderpanel extends JFrame implements ActionListener{
 					f.close();
                     orderList.add(o);
 					this.setVisible(false);
-					
+
 				} catch (IOException e1) {
 					JOptionPane.showMessageDialog(this, "Something went wrong");;
 				}
@@ -381,6 +459,29 @@ public void actionPerformed(ActionEvent e) {
     if (e.getSource()==addRecord){
 		Orderpanel o =new Orderpanel();
 	}
+	if (e.getSource()==delRecord){
+		int row = table.getSelectedRow();
+		String val ="";
+
+
+	   if (createJOptionpane("Are you sure you want to delete this item")==0){
+			for (OrdItem i : orderList) {
+				if (i.getOrdnum()==(Integer.parseInt(table.getValueAt(row, 0).toString()))){
+					val=""+i.getOrdnum();
+					removeRecord(val);
+					orderList.remove(i);
+					model.setRowCount(0);
+					showTable(orderList);
+					break;
+		
+				}   
+			}
+		}
+
+	}
+
+
+	
 	if (e.getSource()==sortByOrdNum){
 
 	Collections.sort(orderList, new Comp());
