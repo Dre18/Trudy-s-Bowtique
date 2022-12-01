@@ -1,4 +1,6 @@
 package APP.OrderManagement;
+import java.io.File;
+import java.io.IOException;
 import java.text.*;
 import java.util.Date;
 public class OrdItem{
@@ -27,21 +29,41 @@ public class OrdItem{
             this.cost=cost;
     
         }
-        public OrdItem(String name, String addr, String ordDescrip, String phonenum, String cost) {
+        public OrdItem(String name, String deadline, String addr, String ordDescrip, String phonenum, String cost) {
             
-            count++;
-            date= new Date();
+    
+            this.date= new Date();
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            this.deadline= "" + formatter.format(date);
-            this.ordnum=count;
+            this.deadline= deadline;
+            this.ordnum=1 + calcOrdernum("OrderList.dat");
             this.name = name;
             this.addr=addr;
             this.ordDescrip=ordDescrip;
             this.phonenum=phonenum;
             this.cost=cost;
+            this.status_2=status[0];
+
     
         }
-    
+
+        public int calcOrdernum(String pfile){
+            java.util.Scanner pscan = null; 
+            int i =0;
+            try {
+                pscan = new java.util.Scanner(new File(pfile));
+                while (pscan.hasNext()) {
+                    String[] nextLine = pscan.nextLine().split(" ");
+                    int num = Integer.parseInt(nextLine[0]);
+                    if (num>i){
+                        i= num;
+                    }
+                }
+                pscan.close();
+             } catch (IOException e) {
+                }
+            
+            return i;
+        }
         public OrdItem(String name2, int stockID) {
         }
     

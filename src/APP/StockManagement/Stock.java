@@ -37,7 +37,7 @@ public class Stock extends JPanel {
     private JButton delete;
     private JPanel pnlCommand;
     private JPanel pnlDisplay;
-    private ArrayList<Item> ilist;
+    private static ArrayList<Item> ilist;
     private JScrollPane scrollPane;
     private JTable table;
     private DefaultTableModel model;
@@ -158,7 +158,7 @@ public class Stock extends JPanel {
         addToTable(I);
 
     }
-    public ArrayList<Item> getItems(){
+    public static ArrayList<Item> getItems(){
         return ilist;
     }
     public void reduceStock(String item_name, int c){
@@ -341,8 +341,6 @@ public class Stock extends JPanel {
     private class AddItemButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource()==addItem){
-            
-
                 try{
                 if (item.getText().isEmpty()){
                 JOptionPane.showMessageDialog(pnl, "Incomplete Fields");
