@@ -1,6 +1,4 @@
 package APP.System_User_Interface;
-
-// package APP.AuthenticationandAuthorization;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -71,7 +69,7 @@ public class SystemDisplay extends JPanel {
         logIn.setBounds(300, 430, 200, 68);
         logIn.setBackground(Color.lightGray);
         Close = new JButton("Close");
-        Close.setBounds(800, 430, 200, 68);
+        Close.setBounds(1000, 430, 200, 68);
         Close.setBackground(Color.lightGray);
         Close.addActionListener(new CloseButtonListener());
         logIn.addActionListener(new LoginButtonListener());

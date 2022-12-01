@@ -56,6 +56,5 @@ public class SalesReportGenerator {
 	  		e.printStackTrace();
 		
 		}
-    
-}
+    }
 }

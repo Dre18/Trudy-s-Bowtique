@@ -55,7 +55,7 @@ public class UserAuth extends JFrame implements ActionListener {
             userText = userTF.getText();
             pwdText = String.valueOf(passwordField.getPassword());
             //String[] user = { "Admin Admin" };
-            int a = 0;
+            int a = 1;
             //for (int i = 0; i < user.length; i++) {
               //  String[] s = user[i].split(" ");
                // if (userText.equals(s[0]) && pwdText.equals(s[1])) {
@@ -86,6 +86,18 @@ public class UserAuth extends JFrame implements ActionListener {
                 passwordField.setEchoChar('*');
             }
         }
+
+        
+    }
+    
+    public void createAndShowGUI() {
+        JFrame frame = new JFrame("Report");
+        MainView newContentPane = new MainView();
+        frame.setPreferredSize(frame.getToolkit().getScreenSize());
+        newContentPane.setOpaque(true);
+        frame.setContentPane(newContentPane);
+        frame.pack();
+        frame.setVisible(true);
 
     }
 

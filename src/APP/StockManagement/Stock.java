@@ -40,7 +40,7 @@ public class Stock extends JPanel {
     private JTextField item;
     private JTextField Quantity;
     private JPanel pnl;
-    private static final String file= "StockList.dat";
+    private static final String file = "StockList.dat";
  
   
     public Stock() {
@@ -135,7 +135,7 @@ public class Stock extends JPanel {
     }
 
     public void createAndShowGUI() {
-        JFrame frame = new JFrame("Trudy's Bowtique");
+        JFrame frame = new JFrame("Stock");
         Stock newContentPane = new Stock();
         frame.setPreferredSize(frame.getToolkit().getScreenSize());
         newContentPane.setOpaque(true);
@@ -178,6 +178,10 @@ public class Stock extends JPanel {
                             showTable(ilist);
                         }
                     }
+
+                    
+                    
+                        
                         
                 }
 
@@ -192,7 +196,22 @@ public class Stock extends JPanel {
                         }
     
                     }
+
+                    String new_item = item.getText().trim().replace(" ", "_");
+                    item.setText("");
+                    int item_quantity = Integer.parseInt(Quantity.getText().trim());
+                    Quantity.setText("");
+                    Item I = new Item(new_item, item_quantity);
+                    
+                        FileWriter fw = new FileWriter(file, true);
+                        BufferedWriter bw = new BufferedWriter(fw);
+                        PrintWriter pw = new PrintWriter(bw);
+                        pw.println(I.getItemName() + " " + I.getItemQuantity());
+                        pw.close();
+                        bw.close();
+                        fw.close();
                 }
+                
                 
                 }
                 catch (NumberFormatException n) {
@@ -202,11 +221,7 @@ public class Stock extends JPanel {
                 }
                 
             }
-
-            
-
-
-         }
+        }
 
     }
 
@@ -251,7 +266,7 @@ public class Stock extends JPanel {
     }
     private class DeleteButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent a) {
-            if (a.getSource()==delete){
+            if (a.getSource() == delete){
                 int row = table.getSelectedRow();
                 String val ="";
 
@@ -308,13 +323,7 @@ public class Stock extends JPanel {
             }
         }
     }
-    // private class CloseButtonListener implements ActionListener {
-    //     public void actionPerformed(ActionEvent e) {
-    //         Stock stock = new Stock();
-    //         stock.setOpaque(true);
-    //     }
-
-    // }
+   
    
 }
 

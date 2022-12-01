@@ -4,6 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import APP.MonthlysalesReporting.SalesReportGenerator;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -56,7 +59,18 @@ public class MainView extends JPanel {
     
     private class ReportButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
-        System.exit(0);
+        if(e.getSource() == report)
+        {
+            try{
+                APP.MonthlysalesReporting.SalesReportGenerator report = new APP.MonthlysalesReporting.SalesReportGenerator();
+                SystemDisplay newContentPane = new SystemDisplay();
+                newContentPane.setOpaque(false);
+            }
+            catch (Exception k)
+            {
+
+            }
+        }
     }
 
 }  
@@ -98,7 +112,6 @@ public class MainView extends JPanel {
                     newContentPane.setOpaque(true);
                     mainView.setOpaque(false);
                     frame.setTitle("Order");
-                    // Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
                     frame.setResizable(true);
                     frame.pack();
                     frame.setVisible(true);
