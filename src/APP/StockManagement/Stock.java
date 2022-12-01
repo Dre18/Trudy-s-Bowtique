@@ -204,88 +204,141 @@ public class Stock extends JPanel {
     }
 
 
-    private class UpdateButtonListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == update)
-            {
-                try
-                {
+//     private class UpdateButtonListener implements ActionListener {
+//         public void actionPerformed(ActionEvent e) {
+//             if (e.getSource() == update)
+//             {
+//                 try
+//                 {
                     
 
-                    int irow = table.getSelectedRow();
-                if (item.getText().isEmpty() == false) {
-                    for (Item i : ilist) {
-                        if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
-                            Item  item = new Item(i.getItemName(), i.getItemQuantity());
-                            ilist.remove(i);
-                            ilist.add(item);
-                            model.setRowCount(0);
-                            showTable(ilist);
+//                     int irow = table.getSelectedRow();
+//                 if (item.getText().isEmpty() == false) {
+//                     for (Item i : ilist) {
+//                         if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
+//                             Item  item = new Item(i.getItemName(), i.getItemQuantity());
+//                             ilist.remove(i);
+//                             ilist.add(item);
+//                             model.setRowCount(0);
+//                             showTable(ilist);
                             
-                            FileReader File = new FileReader(new File(file));
-                            BufferedReader br = new BufferedReader(File);
-                            String temp = br.readLine();
-                            while (temp != null) {
-                            temp = br.readLine();
-                            System.out.println(temp);
+//                             FileReader File = new FileReader(new File(file));
+//                             BufferedReader br = new BufferedReader(File);
+//                             String temp = br.readLine();
+//                             while (temp != null) {
+//                             temp = br.readLine();
+//                             System.out.println(temp);
 
-                            FileInputStream fis = new FileInputStream(file);
-                            try(ObjectInputStream objectstream = new ObjectInputStream(fis)){
+//                             FileInputStream fis = new FileInputStream(file);
+//                             try(ObjectInputStream objectstream = new ObjectInputStream(fis)){
 
-                                objectstream.readObject();
-                            }
+//                                 objectstream.readObject();
+//                             }
                        
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//             catch (NumberFormatException n) {
+//                 JOptionPane.showMessageDialog(pnl, "Quantity Invalid");
+//             } catch (Exception l) {
+//                 JOptionPane.showMessageDialog(pnl,"Please Close Application\nIf problem persists");
+//             }
+            
+//         }
+// }                    
+//     }
+
+    private class UpdateButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == update){
+                if  ( table.isEditing() )
+				{
+                    String val;
+					int row = table.getEditingRow();
+					int col = table.getEditingColumn();
+					table.getCellEditor(row, col).stopCellEditing();
+				    int count= table.getRowCount();
+                    int num=0;
+				    for (Item i: ilist){
+                    
+                        val= table.getValueAt(row,col).toString();
+                        String tempfile = "temp.dat";
+                        String currentline;
+                        File oldfile= new File(file);
+                        File newfile = new File(tempfile);
+                        try {
+                            FileWriter fw = new FileWriter(tempfile, true);
+                            BufferedWriter bw = new BufferedWriter(fw);
+                            PrintWriter pw = new PrintWriter(bw);
+            
+                            FileReader fr = new FileReader(file);
+                            BufferedReader br = new BufferedReader(fr);
+                            
+                            while ((currentline =br.readLine()) != null) {
+                                String[] data = currentline.split(" ");
+                                num++;
+                                if (!(num==count)) {
+                                     pw.println(currentline);
+                                }
+                                else{
+                                    data[col]=val;
+                                    String txt= data[0]+" "+data[1];
+                                     pw.println(txt);
+                                }
+                                
+                            }
+                            pw.flush();
+                            pw.close();
+                            br.close();
+                            fr.close();
+                            fw.close();
+                            bw.close();
+            
+                            oldfile.delete();
+                            File temp = new File(file);
+                            newfile.renameTo(temp);
+                        }
+            
+                        catch (IOException IO) {
                         }
                     }
+                    
                 }
             }
-        }
-            catch (NumberFormatException n) {
-                JOptionPane.showMessageDialog(pnl, "Quantity Invalid");
-            } catch (Exception l) {
-                JOptionPane.showMessageDialog(pnl,"Please Close Application\nIf problem persists");
-            }
-            
-        }
-}                    
-    }
-
-    // private class UpdateButtonListener implements ActionListener {
-    //     public void actionPerformed(ActionEvent e) {
-    //         if (e.getSource() == update)
-    //         {
-    //             try
-    //              {
-                //     int irow = table.getSelectedRow();
-                // if (item.getText().isEmpty() == false) {
-                //     for (Item i : ilist) {
-                //         if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
-                //             Item  item = new Item(i.getItemName(), i.getItemQuantity());
-                //             ilist.remove(i);
-                //             ilist.add(item);
-                //             model.setRowCount(0);
-                //             showTable(ilist);
+            //     try
+            //      {
+            //         int irow = table.getSelectedRow();
+            //     if (item.getText().isEmpty() == false) {
+            //         for (Item i : ilist) {
+            //             if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
+            //                 Item  item = new Item(i.getItemName(), i.getItemQuantity());
+            //                 ilist.remove(i);
+            //                 ilist.add(item);
+            //                 model.setRowCount(0);
+            //                 showTable(ilist);
                             
-                //             FileReader File = new FileReader(new File(file));
-                //             BufferedReader br = new BufferedReader(File);
-                //             String temp = br.readLine();
-                //             while (temp != null) {
-                //             temp = br.readLine();
-                //             System.out.println(temp);
+            //                 FileReader File = new FileReader(new File(file));
+            //                 BufferedReader br = new BufferedReader(File);
+            //                 String temp = br.readLine();
+            //                 while (temp != null) {
+            //                 temp = br.readLine();
+            //                 System.out.println(temp);
 
-                //             FileInputStream fis = new FileInputStream(file);
-                //             try(ObjectInputStream objectstream = new ObjectInputStream(fis)){
+            //                 FileInputStream fis = new FileInputStream(file);
+            //                 try(ObjectInputStream objectstream = new ObjectInputStream(fis)){
 
-                //                 objectstream.readObject();
-                //             }
+            //                     objectstream.readObject();
+            //                 }
                             
-                //     }
+            //         }
                         
                         
-            //     }
+                }
                 
 
-            // }             
+            }             
                 
                   
             //     JOptionPane.showMessageDialog(pnl, "Incomplete Fields");
