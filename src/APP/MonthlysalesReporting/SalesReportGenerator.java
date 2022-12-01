@@ -52,15 +52,17 @@ public class SalesReportGenerator {
 	    			String num=Integer.toString(count);
 	    			String txt = "Sales #: "+num+ "\n"+"Order #: "+ordnum+" by: "+ name + " " + "Purchase: "+ descrip +" Cost: " + cost +"\n\n";
 					int cost2 = Integer.parseInt(cost.replace("$", ""));
-					status = status.strip();
-					if(status == "Completed")
-					{
+					// status = status.strip();
+					// if(status.equals("Completed"))
+					// {
 						myWriter.write(txt);
 
-					}
+					// }
 	    			
+					// else{
+						totalCost2 += cost2;
+					// }
 					
-					totalCost2 += cost2;
 	    		
 	    		
 	  		}

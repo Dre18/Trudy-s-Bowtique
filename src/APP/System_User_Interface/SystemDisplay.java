@@ -51,12 +51,8 @@ public class SystemDisplay extends JPanel {
                     JOptionPane.showInputDialog("System Error");
 
                 }
-                DLineAlert datess= new DLineAlert();
-                datess.setDate(a,b,c);
-                datess.addDate(a,b,c);
                 
-                // System.out.println(datess.CompareDate(date));
-
+                DLineAlert datess= new DLineAlert();
                 }
         });
     }

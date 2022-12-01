@@ -5,8 +5,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
@@ -31,7 +29,7 @@ public class MainView extends JPanel {
         displayPanel = new JPanel();
         displayPanel.setPreferredSize(displayPanel.getToolkit().getScreenSize());
         displayPanel.setLayout(null);
-        panelColor = new Color(123, 154, 239);
+        panelColor = new Color(200, 150, 200);
         displayPanel.setBackground(panelColor);
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane);

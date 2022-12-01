@@ -21,6 +21,7 @@ import javax.swing.plaf.ColorChooserUI;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.table.DefaultTableModel;
 
+import APP.NotificationsandEvents.DLineAlert;
 import APP.StockManagement.Stock;
 
 import javax.swing.*;
@@ -59,14 +60,14 @@ public class Order extends JFrame implements ActionListener{
 
         toppanel=new JPanel();  
         ordWindow = new JFrame();
-       	ordWindow.setBackground(Color.pink);
+       	// ordWindow.setBackground(Color.pink);
 
         toppanel.setBounds(0,0,1500,800);    
         
         toppanel.setLayout(new GridLayout(0,2));
         detailspanel = new JTextArea();
         detailspanel.setLayout(new FlowLayout());
-        detailspanel.setBackground(Color.LIGHT_GRAY); 
+        detailspanel.setBackground(Color.yellow); 
         optionBar = new JMenuBar();   
         
         	sortRecord = new JMenu("Sort By ");
@@ -137,6 +138,8 @@ public class Order extends JFrame implements ActionListener{
             detailspanel.setEditable(false);
 
             
+            
+
             table.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     Point point = e.getPoint();
