@@ -16,6 +16,8 @@ import javax.swing.JButton;
 
 public class MainView extends JPanel {
 
+    JPanel CommandPanel;
+    JPanel displayPanel;
     public JButton report;
     public JButton Stock;
     public JButton Order;
@@ -26,8 +28,8 @@ public class MainView extends JPanel {
 
    public MainView() {
 
-        JPanel CommandPanel = new JPanel();
-        JPanel displayPanel = new JPanel();
+        CommandPanel = new JPanel();
+        displayPanel = new JPanel();
         displayPanel.setPreferredSize(displayPanel.getToolkit().getScreenSize());
         displayPanel.setLayout(null);
         panelColor = new Color(123, 154, 239);
@@ -59,12 +61,14 @@ public class MainView extends JPanel {
     }
     
     private class ReportButtonListener implements ActionListener {
+    private static final JOptionPane JJOptionPane = null;
+
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == report)
         {
            try{
             APP.MonthlysalesReporting.SalesReportGenerator.getInfo();
-            JOptionPane.showInputDialog(this,"SalesReport saved");
+            JJOptionPane.showMessageDialog(displayPanel, "Monthly Report Saved");
            }
            catch (Exception n)
            {
