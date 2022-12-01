@@ -46,6 +46,11 @@ public class OrdItem{
     
         }
 
+        
+        /** 
+         * @param pfile
+         * @return int
+         */
         public int calcOrdernum(String pfile){
             java.util.Scanner pscan = null; 
             int i =0;
@@ -67,32 +72,64 @@ public class OrdItem{
         public OrdItem(String name2, int stockID) {
         }
     
+        
+        /** 
+         * @return String
+         */
         public String getName() {
             return name;
         }
 
+        
+        /** 
+         * @return String
+         */
         public String getAddr() {
             return addr;
         }
 
+        
+        /** 
+         * @return String
+         */
         public String getOrdDescrip() {
             return ordDescrip;
         }
 
+        
+        /** 
+         * @return String
+         */
         public String getPhonenum() {
             return this.phonenum;
         }
 
+        
+        /** 
+         * @return String
+         */
         public String getDeadline() {
             return deadline;
         }
 
+        
+        /** 
+         * @return String
+         */
         public String getCost() {
             return cost;
         }
+         
+         /** 
+          * @return int
+          */
          public int getOrdnum() {
             return ordnum;
         }
+        
+        /** 
+         * @return String
+         */
         public String getStatus_2() {
             return status_2;
         }

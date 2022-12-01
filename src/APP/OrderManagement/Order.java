@@ -152,7 +152,13 @@ public class Order extends JFrame implements ActionListener{
             }); 
     }
   
-	public String DisplayDetails(String pfile, String val){
+	
+    /** 
+     * @param pfile
+     * @param val
+     * @return String
+     */
+    public String DisplayDetails(String pfile, String val){
 
 		Scanner pscan = null;
         String str="";
@@ -186,6 +192,11 @@ public class Order extends JFrame implements ActionListener{
         return str;
     }
 
+    
+    /** 
+     * @param pfile
+     * @return ArrayList<OrdItem>
+     */
     public ArrayList<OrdItem> loadItems(String pfile){
         Scanner pscan = null;
         ArrayList<OrdItem> orderList = new ArrayList<OrdItem>();
@@ -216,11 +227,19 @@ public class Order extends JFrame implements ActionListener{
         return orderList;
     }
 
+    
+    /** 
+     * @param i
+     */
     public void addToTable(OrdItem i) {
         String[] item = { ""+i.getOrdnum(),  i.getName(), i.getStatus_2(), i.getDeadline()};
         model.addRow(item);
     }
 
+    
+    /** 
+     * @param orderList
+     */
     private void showTable(ArrayList<OrdItem> orderList) {
         if (orderList.size() > 0) {
             for (OrdItem i : orderList) {
@@ -242,11 +261,20 @@ public void createAndShowGUI() {
 		f.setVisible(true);
 
 }
+
+/** 
+ * @param str
+ * @return int
+ */
 public int createJOptionpane(String str){
 	int n = JOptionPane.showConfirmDialog(this, str,"Confirmation",JOptionPane.YES_NO_OPTION);
 	return n;
 }
 
+
+/** 
+ * @param val
+ */
 public void removeRecord(String val){
 	String tempfile = "temp.dat";
 	String currentline;
@@ -462,6 +490,10 @@ private class Orderpanel extends JFrame implements ActionListener{
 }
 
 
+
+/** 
+ * @param e
+ */
 @Override
 public void actionPerformed(ActionEvent e) {
     if (e.getSource()==addRecord){

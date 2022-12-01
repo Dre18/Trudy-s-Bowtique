@@ -13,14 +13,26 @@ public class Item{
     
         }
     
+        
+        /** 
+         * @return String
+         */
         public String getItemName() {
             return name;
         }
     
+        
+        /** 
+         * @return int
+         */
         public int getItemQuantity() {
             return quantity;
         }
 
+        
+        /** 
+         * @param x
+         */
         public void changeQuantity(int x){
                 this.quantity -= x;
        

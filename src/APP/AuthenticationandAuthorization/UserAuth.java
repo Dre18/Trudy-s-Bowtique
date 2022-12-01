@@ -45,6 +45,10 @@ public class UserAuth extends JFrame implements ActionListener {
 
     }
 
+    
+    /** 
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 

@@ -15,8 +15,13 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
- * GROUP Members...
- * 
+ * GROUP Members....
+ * André Cunningham ...... 620108055
+ * Jennia Dacres ......... 620147799
+ * Deallia Dunbar ........ 620146170
+ * Delroy Robinson ....... 620148150
+ * Joseph Hylton ......... 620099412
+ * Shantae Saddler ....... 620149301
  * 
  **/
 
@@ -28,6 +33,10 @@ public class SystemDisplay extends JPanel {
     private Color panelColor;
     static int a,b,c;
 
+    
+    /** 
+     * @param args
+     */
     public static void main(String[] args) {
 
         javax.swing.SwingUtilities.invokeLater(new Runnable() {

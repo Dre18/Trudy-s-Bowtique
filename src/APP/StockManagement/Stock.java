@@ -87,6 +87,11 @@ public class Stock extends JPanel {
     
 
 }
+    
+    /** 
+     * @param pfile
+     * @return ArrayList<Item>
+     */
     private ArrayList<Item> loadStock(String pfile){
         Scanner pscan = null;
         ArrayList<Item> ilist = new ArrayList<Item>();
@@ -113,14 +118,27 @@ public class Stock extends JPanel {
         return ilist;
     }
 
+   
+   /** 
+    * @param I
+    */
    public void addItem(Item I) {
         ilist.add(I);
         addToTable(I);
 
     }
+    
+    /** 
+     * @return ArrayList<Item>
+     */
     public static ArrayList<Item> getItems(){
         return ilist;
     }
+    
+    /** 
+     * @param item_name
+     * @param c
+     */
     public void reduceStock(String item_name, int c){
         //reduces the stock qauntity based on order made
         for (Item i: ilist){
@@ -131,6 +149,10 @@ public class Stock extends JPanel {
         }
     }
     
+    
+    /** 
+     * @param i
+     */
     public void addToTable(Item i) {
         String[] item = { i.getItemName(), "" + i.getItemQuantity()};
         model.addRow(item);
@@ -146,6 +168,11 @@ public class Stock extends JPanel {
         frame.setVisible(true);
 
     }
+    
+    /** 
+     * @param str
+     * @return int
+     */
     public int createJOptionpane(String str){
         int n = JOptionPane.showConfirmDialog(pnl, str,"Confirmation",JOptionPane.YES_NO_OPTION);
         return n;
@@ -153,6 +180,10 @@ public class Stock extends JPanel {
 
 
     
+    
+    /** 
+     * @param ilist
+     */
     private void showTable(ArrayList<Item> ilist) {
         if (ilist.size() > 0) {
             for (Item i : ilist) {
