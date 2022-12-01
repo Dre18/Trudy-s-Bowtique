@@ -95,6 +95,7 @@ public class Stock extends JPanel {
 
         Scanner pscan;
         try {
+            int quantity=0;
             pscan = new Scanner(new File(file));
             while (pscan.hasNext()) {
                 int sum = 0;
@@ -102,7 +103,7 @@ public class Stock extends JPanel {
                 if (nextLine[0].isEmpty() == false ){
                     // continue;
                     String name = nextLine[0];
-                    int quantity = Integer.parseInt(nextLine[1]);
+                    quantity += Integer.parseInt(nextLine[1]);
                     sum = sum + quantity;
                     Item item = new Item(name, sum);
                     ilist.add(item);

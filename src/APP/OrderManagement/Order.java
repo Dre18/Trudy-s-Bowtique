@@ -330,53 +330,53 @@ private class Orderpanel extends JFrame implements ActionListener{
         title.setSize(300, 30);
         title.setLocation(1200, 30);
         a.add(title, BorderLayout.NORTH);
- 
+		 
         name = new JLabel("Name");
         name.setFont(new Font("Arial", Font.PLAIN, 20));
         name.setSize(100, 20);
-        name.setLocation(100, 100);
+        name.setLocation(50, 100);
         c.add(name);
  
         tname = new JTextField();
         tname.setFont(new Font("Arial", Font.PLAIN, 15));
-        tname.setSize(190, 20);
-        tname.setLocation(200, 100);
+        tname.setSize(150, 20);
+        tname.setLocation(180, 100);
         c.add(tname);
  
         mobile = new JLabel("Mobile (xxx-xxx-xxxx)");
         mobile.setFont(new Font("Arial", Font.PLAIN, 18));
         mobile.setSize(200, 20);
-        mobile.setLocation(100, 150);
+        mobile.setLocation(50, 150);
         c.add(mobile);
  
         t_mob = new JTextField();
         t_mob.setFont(new Font("Arial", Font.PLAIN, 15));
         t_mob.setSize(150, 20);
-        t_mob.setLocation(300, 150);
+        t_mob.setLocation(220, 150);
         c.add(t_mob);
 
         dline = new JLabel("Deadline (dd/mm/yyyy)");
         dline.setFont(new Font("Arial", Font.PLAIN, 18));
         dline.setSize(200, 20);
-        dline.setLocation(100, 200);
+        dline.setLocation(50, 200);
         c.add(dline);
  
         t_dline = new JTextField();
         t_dline.setFont(new Font("Arial", Font.PLAIN, 15));
         t_dline.setSize(100, 20);
-        t_dline.setLocation(300, 200);
+        t_dline.setLocation(250, 200);
         c.add(t_dline);
  
         add = new JLabel("Address");
         add.setFont(new Font("Arial", Font.PLAIN, 20));
         add.setSize(100, 20);
-        add.setLocation(100, 250);
+        add.setLocation(50, 250);
         c.add(add);
  
         tadd = new JTextArea();
         tadd.setFont(new Font("Arial", Font.PLAIN, 15));
         tadd.setSize(250, 50);
-        tadd.setLocation(200, 250);
+        tadd.setLocation(220, 250);
         tadd.setLineWrap(true);
         c.add(tadd);
 
@@ -396,13 +396,13 @@ private class Orderpanel extends JFrame implements ActionListener{
         cost = new JLabel("Cost:");
         cost.setFont(new Font("Arial", Font.PLAIN, 20));
         cost.setSize(100, 20);
-        cost.setLocation(100, 500);
+        cost.setLocation(150, 500);
         c.add(cost);
  
         t_cost = new JTextField();
         t_cost.setFont(new Font("Arial", Font.PLAIN, 15));
         t_cost.setSize(85, 30);
-        t_cost.setLocation(200, 500);
+        t_cost.setLocation(220, 500);
         c.add(t_cost);
  
         Done = new JButton("Done");
@@ -422,8 +422,10 @@ private class Orderpanel extends JFrame implements ActionListener{
  
         resadd = new JTextArea();
         resadd.setFont(new Font("Arial", Font.PLAIN, 15));
-        resadd.setSize(200, 75);
-        resadd.setLocation(200, 100);
+        resadd.setSize(250, 300);
+		resadd.setMargin(new InsetsUIResource(10,10,10,10));
+		resadd.setText("eg:\n Red_Polo_Shirts 5\n (Delete this example before typing)");
+        resadd.setLocation(180, 100);
 		
         d.add(resadd);
          
