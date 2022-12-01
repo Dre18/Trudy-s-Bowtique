@@ -30,7 +30,8 @@ public class Notification{
         trayIcon.setToolTip("System tray icon demo");
         tray.add(trayIcon);
 
-        trayIcon.displayMessage("Trudy's Bowtique Store Manager", "notification demo", MessageType.INFO);
+        trayIcon.displayMessage("Trudy's Bowtique Store Manager", "ALERT Stock is below 50% \n"
+       +"Please address the Stock Management System", MessageType.INFO);
     }
 }
 
