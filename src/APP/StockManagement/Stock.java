@@ -93,33 +93,33 @@ public class Stock extends JPanel {
 //         // filereader(Scanner file);
     
 
-//         Scanner pscan;
-//         try {
-//             pscan = new Scanner(new File(file));
-//             while (pscan.hasNext()) {
-//                 int sum = 0;
-//                 String[] nextLine = pscan.nextLine().split(" ");
-//                 if (nextLine[0].isEmpty() == false ){
-//                     // continue;
-//                     String name = nextLine[0];
-//                     int quantity = Integer.parseInt(nextLine[1]);
-//                     sum = sum + quantity;
-//                     Item item = new Item(name, sum);
-//                     ilist.add(item);
-//                     int a = quantity/2;
-//                     int d = quantity - sum;
-//                     if(d<= a)
-//                     {
-//                        APP.NotificationsandEvents.Notification n = new  Notification() ;
-//                     }
-//                 }
+        // Scanner pscan;
+        // try {
+        //     pscan = new Scanner(new File(file));
+        //     while (pscan.hasNext()) {
+        //         int sum = 0;
+        //         String[] nextLine = pscan.nextLine().split(" ");
+        //         if (nextLine[0].isEmpty() == false ){
+        //             // continue;
+        //             String name = nextLine[0];
+        //             int quantity = Integer.parseInt(nextLine[1]);
+        //             sum = sum + quantity;
+        //             Item item = new Item(name, sum);
+        //             ilist.add(item);
+        //             int a = quantity/2;
+        //             int d = quantity - sum;
+        //             if(d<= a)
+        //             {
+        //                APP.NotificationsandEvents.Notification n = new  Notification() ;
+        //             }
+        //         }
         
-//             }
-//             pscan.close();
-//         } catch (FileNotFoundException e) {
-//             // TODO Auto-generated catch block
-//             e.printStackTrace();
-//         }
+        //     }
+        //     pscan.close();
+        // } catch (FileNotFoundException e) {
+        //     // TODO Auto-generated catch block
+        //     e.printStackTrace();
+        // }
             
         
     
@@ -250,94 +250,7 @@ public class Stock extends JPanel {
 }                    
     }
 
-    // private class UpdateButtonListener implements ActionListener {
-    //     public void actionPerformed(ActionEvent e) {
-    //         if (e.getSource() == update)
-    //         {
-    //             try
-    //              {
-                //     int irow = table.getSelectedRow();
-                // if (item.getText().isEmpty() == false) {
-                //     for (Item i : ilist) {
-                //         if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
-                //             Item  item = new Item(i.getItemName(), i.getItemQuantity());
-                //             ilist.remove(i);
-                //             ilist.add(item);
-                //             model.setRowCount(0);
-                //             showTable(ilist);
-                            
-                //             FileReader File = new FileReader(new File(file));
-                //             BufferedReader br = new BufferedReader(File);
-                //             String temp = br.readLine();
-                //             while (temp != null) {
-                //             temp = br.readLine();
-                //             System.out.println(temp);
-
-                //             FileInputStream fis = new FileInputStream(file);
-                //             try(ObjectInputStream objectstream = new ObjectInputStream(fis)){
-
-                //                 objectstream.readObject();
-                //             }
-                            
-                //     }
-                        
-                        
-            //     }
-                
-
-            // }             
-                
-                  
-            //     JOptionPane.showMessageDialog(pnl, "Incomplete Fields");
-            //     }
-                
-            //         String new_item = item.getText().trim().replace(" ", "_");
-            //         item.setText("");
-            //         int item_quantity = Integer.parseInt(Quantity.getText().trim());
-            //         Quantity.setText("");
-            //         Item I = new Item(new_item, item_quantity);
-                    
-            //             FileWriter fw = new FileWriter(file, true);
-            //             BufferedWriter bw = new BufferedWriter(fw);
-            //             PrintWriter pw = new PrintWriter(bw);
-            //             pw.println(I.getItemName() + " " + I.getItemQuantity());
-            //             pw.close();
-            //             bw.close();
-            //             fw.close();
-                       
-                        
-                
-
-            //     if (Quantity.getText().isEmpty() == false) {
-            //         for (Item i : ilist) {
-            //             if (i.getItemName().equals(table.getModel().getValueAt(irow, 1))) {
-            //                 Item item = new Item(i.getItemName(), i.getItemQuantity());
-            //                 ilist.remove(i);
-            //                 ilist.add(item);
-            //                 model.setRowCount(0);
-            //                 showTable(ilist);
-            //             }
     
-            //         }
-
-                    // String new_item = item.getText().trim().replace(" ", "_");
-                    // item.setText("");
-                    // int item_quantity = Integer.parseInt(Quantity.getText().trim());
-                    // Quantity.setText("");
-                    // Item I = new Item(new_item, item_quantity);
-                    
-                    //     FileWriter fw = new FileWriter(file, true);
-                    //     BufferedWriter bw = new BufferedWriter(fw);
-                    //     PrintWriter pw = new PrintWriter(bw);
-                    //     pw.println(I.getItemName() + " " + I.getItemQuantity());
-                    //     pw.close();
-                    //     bw.close();
-                    //     fw.close();
-                // }
-                
-                
-                // }
-                          
     private class AddItemButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource()==addItem){
