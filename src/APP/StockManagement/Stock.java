@@ -35,7 +35,7 @@ public class Stock extends JPanel {
     private JButton delete;
     private JPanel pnlCommand;
     private JPanel pnlDisplay;
-    private ArrayList<Item> ilist;
+    private static ArrayList<Item> ilist;
     private JScrollPane scrollPane;
     private JTable table;
     private DefaultTableModel model;
@@ -118,7 +118,7 @@ public class Stock extends JPanel {
         addToTable(I);
 
     }
-    public ArrayList<Item> getItems(){
+    public static ArrayList<Item> getItems(){
         return ilist;
     }
     public void reduceStock(String item_name, int c){
@@ -246,32 +246,6 @@ public class Stock extends JPanel {
     private class AddItemButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource()==addItem){
-
-
-                // ArrayList<Item> lines = new ArrayList<Item>();
-                // String line = null;
-                // Point point e.getPoint();
-                //  try
-                //     {
-                //         File f1 = new File(file);
-                //         FileReader fr = new FileReader(f1);
-                //         BufferedReader br = new BufferedReader(fr);
-                //         while (line = br.readLine() != null)
-                //         {
-                //             if (line.contains())
-                //                 line = line.replace("java", " ");
-                //             lines.add(line);
-                //         }
-                //         FileWriter fw = new FileWriter(f1);
-                //         BufferedWriter out = new BufferedWriter(fw);
-                //         out.write(lines.toString());
-                //     }
-                //     catch (Exception ex)
-                //     {
-                //         ex.printStackTrace();
-                //     }
-                
-
                 try{
                 if (item.getText().isEmpty()){
                 JOptionPane.showMessageDialog(pnl, "Incomplete Fields");
