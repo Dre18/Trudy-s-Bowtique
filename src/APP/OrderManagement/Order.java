@@ -1,7 +1,10 @@
 package APP.OrderManagement;
 import java.awt.LayoutManager;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,6 +24,9 @@ import javax.swing.ViewportLayout;
 import javax.swing.plaf.ColorChooserUI;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.table.DefaultTableModel;
+
+import APP.StockManagement.Stock;
+
 import javax.swing.*;
 import javax.swing.JLabel;
 import java.awt.*;    
@@ -37,6 +43,7 @@ public class Order extends JFrame implements ActionListener{
     private static final String file= "OrderList.dat";
     private ArrayList<OrdItem> orderList;
     private JMenuBar optionBar;
+	
 	JMenuItem addRecord;
 	JMenuItem editRecord;
 	JMenuItem delRecord;
@@ -73,9 +80,9 @@ public class Order extends JFrame implements ActionListener{
 			sortRecord.add(sortByCompleted);
 			sortRecord.add(sortByIncomplete);
 			Options = new JMenu("Option");
-			addRecord = new JMenu("New Order");
-			editRecord = new JMenu("Edit Order");
-			delRecord = new JMenu("Remove Order");
+			addRecord = new JMenuItem("New Order");
+			editRecord = new JMenuItem("Edit Order");
+			delRecord = new JMenuItem("Remove Order");
         	Options.add(addRecord);
 			Options.add(editRecord);
 			Options.add(delRecord);
@@ -164,14 +171,6 @@ public class Order extends JFrame implements ActionListener{
         }
 
     }
-    private class MouseListener{
-    public void mouseClicked (MouseEvent m){
-         int row = table.getSelectedRow();
-         String str = table.getValueAt(row, 0).toString();
-         JLabel l = new JLabel(str);
-         detailspanel.add(l);
-    }
-}
 
 public void createAndShowGUI() {
 	Frame f=new Frame("ActionListener Example");  
@@ -184,25 +183,224 @@ public void createAndShowGUI() {
 
 }
 
+private class Orderpanel extends JFrame implements ActionListener{
+     
+    // Components of the Form
+    private Container a;
+    private JLabel title;
+    private JLabel name;
+    private JTextField tname;
+    private JLabel mobile;
+    private JTextField t_mob;
+
+    private JLabel Descrp;
+    private JTextArea t_Descrp;
+
+    private JLabel cost;
+    private JTextField t_cost;
+
+    private JLabel dline;
+    private JTextField t_dline;
+
+    private JLabel gender;
+    private JRadioButton male;
+    private JRadioButton female;
+    private ButtonGroup gengp;
+    private JLabel dob;
+    private JComboBox date;
+    private JComboBox month;
+    private JComboBox year;
+    private JLabel add;
+    private JTextArea tadd;
+    private JCheckBox term;
+    private JButton sub;
+    private JButton Done;
+    private JCheckBox tout;
+    private JLabel res;
+    private JTextArea resadd;
+ 
+
+    public Orderpanel(){
+        setTitle("New Order Form");
+        setBounds(300, 10, 900, 900);
+        setResizable(false);
+        a = getContentPane();
+        JPanel b = new JPanel();
+        b.setLayout(new GridLayout(0,2));
+        JPanel c = new JPanel();
+        c.setLayout(null);
+        JPanel d = new JPanel();
+        d.setLayout(null);
+
+        title = new JLabel("NEW ORDER");
+        title.setFont(new Font("Arial", Font.PLAIN, 30));
+        title.setSize(300, 30);
+        title.setLocation(1200, 30);
+        a.add(title, BorderLayout.NORTH);
+ 
+        name = new JLabel("Name");
+        name.setFont(new Font("Arial", Font.PLAIN, 20));
+        name.setSize(100, 20);
+        name.setLocation(100, 100);
+        c.add(name);
+ 
+        tname = new JTextField();
+        tname.setFont(new Font("Arial", Font.PLAIN, 15));
+        tname.setSize(190, 20);
+        tname.setLocation(200, 100);
+        c.add(tname);
+ 
+        mobile = new JLabel("Mobile (xxx-xxx-xxxx)");
+        mobile.setFont(new Font("Arial", Font.PLAIN, 18));
+        mobile.setSize(200, 20);
+        mobile.setLocation(100, 150);
+        c.add(mobile);
+ 
+        t_mob = new JTextField();
+        t_mob.setFont(new Font("Arial", Font.PLAIN, 15));
+        t_mob.setSize(150, 20);
+        t_mob.setLocation(300, 150);
+        c.add(t_mob);
+
+        dline = new JLabel("Deadline (dd/mm/yyyy)");
+        dline.setFont(new Font("Arial", Font.PLAIN, 18));
+        dline.setSize(200, 20);
+        dline.setLocation(100, 200);
+        c.add(dline);
+ 
+        t_dline = new JTextField();
+        t_dline.setFont(new Font("Arial", Font.PLAIN, 15));
+        t_dline.setSize(100, 20);
+        t_dline.setLocation(300, 200);
+        c.add(t_dline);
+ 
+        add = new JLabel("Address");
+        add.setFont(new Font("Arial", Font.PLAIN, 20));
+        add.setSize(100, 20);
+        add.setLocation(100, 250);
+        c.add(add);
+ 
+        tadd = new JTextArea();
+        tadd.setFont(new Font("Arial", Font.PLAIN, 15));
+        tadd.setSize(250, 50);
+        tadd.setLocation(200, 250);
+        tadd.setLineWrap(true);
+        c.add(tadd);
+
+        Descrp = new JLabel("Order Description");
+        Descrp.setFont(new Font("Arial", Font.PLAIN, 18));
+        Descrp.setSize(200, 40);
+        Descrp.setLocation(50, 320);
+        c.add(Descrp);
+ 
+        t_Descrp = new JTextArea();
+        t_Descrp.setFont(new Font("Arial", Font.PLAIN, 15));
+        t_Descrp.setSize(250, 150);
+        t_Descrp.setLocation(220, 320);
+        t_Descrp.setLineWrap(true);
+        c.add(t_Descrp);
+
+        cost = new JLabel("Cost:");
+        cost.setFont(new Font("Arial", Font.PLAIN, 20));
+        cost.setSize(100, 20);
+        cost.setLocation(100, 500);
+        c.add(cost);
+ 
+        t_cost = new JTextField();
+        t_cost.setFont(new Font("Arial", Font.PLAIN, 15));
+        t_cost.setSize(85, 30);
+        t_cost.setLocation(200, 500);
+        c.add(t_cost);
+ 
+        Done = new JButton("Done");
+        Done.setFont(new Font("Arial", Font.PLAIN, 15));
+        Done.setSize(100, 20);
+        Done.setLocation(270, 600);
+        Done.addActionListener(this);
+        c.add(Done);
+    
+        
+        JLabel res  = new JLabel("reduce stock by");
+        res.setFont(new Font("Arial", Font.PLAIN, 20));
+        res.setSize(300, 25);
+        res.setLocation(100, 100);
+        d.add(res);
+
+ 
+        resadd = new JTextArea();
+        resadd.setFont(new Font("Arial", Font.PLAIN, 15));
+        resadd.setSize(200, 75);
+        resadd.setLocation(200, 100);
+		
+        d.add(resadd);
+         
+        b.add(c);
+        b.add(d);
+        a.add(b, BorderLayout.CENTER);
+        setVisible(true);
+		
+    
+    }
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() ==Done){
+			FileWriter f;
+			try {
+				f = new FileWriter(file, true);
+			
+                    BufferedWriter b = new BufferedWriter(f);
+                    PrintWriter w = new PrintWriter(b);
+					OrdItem o = new OrdItem(tname.getText(), t_dline.getText(), tadd.getText(), t_Descrp.getText(), t_mob.getText(), t_cost.getText());
+                    w.println(o.getOrdnum() + " " + o.getName().replace(" ", "_") + " " + o.getStatus_2() + " "
+                            + o.getDeadline() + " " +o.getPhonenum()+" "+ o.getAddr().replace(" ", "_").replace("\n", "_") + " " + o.getOrdDescrip().replace(" ","_").replace("\n", "_") + " " + o.getCost());
+                    
+					w.flush();
+					w.close();
+					b.close();
+					f.close();
+                    orderList.add(o);
+					this.setVisible(false);
+					
+				} catch (IOException e1) {
+					JOptionPane.showMessageDialog(this, "Something went wrong");;
+				}
+				model.setRowCount(0);
+                orderList=loadItems(file);
+                showTable(orderList);
+		}
+		
+	}
+	
+}
+
 
 @Override
 public void actionPerformed(ActionEvent e) {
-    if (e.getSource()==sortByOrdNum){
+    if (e.getSource()==addRecord){
+		Orderpanel o =new Orderpanel();
+	}
+	if (e.getSource()==sortByOrdNum){
 
 	Collections.sort(orderList, new Comp());
 	model.setRowCount(0);
+	showTable(orderList);
 }  
 
     if (e.getSource()==sortByDeadline){
-		Collections.sort(orderList, new CompD2());
+		Collections.sort(orderList, new CompD3());
 		model.setRowCount(0);
+		showTable(orderList);
 		
 
     }
     if (e.getSource()==sortByCompleted){
-		Collections.sort(orderList, new CompD3());
+		Collections.sort(orderList, new CompD2());
 		model.setRowCount(0);
+		showTable(orderList);
     }
+	
    
 }
 
@@ -219,31 +417,27 @@ private class CompD2 implements Comparator<OrdItem>
 
     @Override
     public int compare(OrdItem o1, OrdItem o2) {
-        // TODO Auto-generated method stub
-        return o1.getDeadline().compareTo((o2.getDeadline()));
+        return o1.getStatus_2().compareTo(o2.getStatus_2());
     }
 }
-private class CompD3 implements Comparator<OrdItem>
+private class CompD3 implements Comparator<OrdItem> 
 {
     @Override
     public int compare(OrdItem o1, OrdItem o2) {
         // TODO Auto-generated method stub
+		
 		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-		Date date1 = new Date();
-		Date date2 = new  Date();
-		try {
-			date1= f.parse(o1.getDeadline());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			date2=f.parse(o2.getDeadline());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        return date1.compareTo((date2));
+		Date date1;
+		Date date2;
+		int n;
+		
+			// date1= f.parse(o1.getDeadline());
+		
+			// date2=f.parse(o2.getDeadline());
+
+		return 0;	
+		
+		//return date1.compareTo((date2));
     }
 }
 }

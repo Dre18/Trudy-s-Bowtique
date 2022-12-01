@@ -14,7 +14,7 @@ public class UserAuth extends JFrame implements ActionListener {
     JTextField userTF = new JTextField();
     JPasswordField passwordField = new JPasswordField();
     JButton loginButton = new JButton("LOGIN");
-    JButton resetButton = new JButton("RESET");
+    JButton DoneButton = new JButton("Done");
     JCheckBox showPassword = new JCheckBox("Show Password");
 
     {
@@ -27,20 +27,20 @@ public class UserAuth extends JFrame implements ActionListener {
         passwordField.setBounds(150, 220, 150, 30);
         showPassword.setBounds(150, 250, 150, 30);
         loginButton.setBounds(50, 300, 100, 30);
-        resetButton.setBounds(200, 300, 100, 30);
+        DoneButton.setBounds(200, 300, 100, 30);
         container.add(username);
         container.add(password);
         container.add(userTF);
         container.add(passwordField);
         container.add(showPassword);
         container.add(loginButton);
-        container.add(resetButton);
+        container.add(DoneButton);
         Color panelColor = new Color(123, 154, 239);
         container.setBackground(panelColor);
         loginButton.addActionListener(this);
         loginButton.setBackground(Color.lightGray);
-        resetButton.addActionListener(this);
-        resetButton.setBackground(Color.lightGray);
+        DoneButton.addActionListener(this);
+        DoneButton.setBackground(Color.lightGray);
         showPassword.addActionListener(this);
         showPassword.setBackground(Color.lightGray);
 
@@ -72,7 +72,7 @@ public class UserAuth extends JFrame implements ActionListener {
             // }
         }
 
-        if (e.getSource() == resetButton) {
+        if (e.getSource() == DoneButton) {
             userTF.setText("");
             passwordField.setText("");
         }
