@@ -8,9 +8,11 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -40,7 +42,7 @@ public class Stock extends JPanel {
     private JTextField item;
     private JTextField Quantity;
     private JPanel pnl;
-    private static final String file = "StockList.dat";
+    private static final String file= "StockList.dat";
  
   
     public Stock() {
@@ -166,6 +168,7 @@ public class Stock extends JPanel {
             {
                 try
                 {
+                    
 
                     int irow = table.getSelectedRow();
                 if (item.getText().isEmpty() == false) {
@@ -176,11 +179,26 @@ public class Stock extends JPanel {
                             ilist.add(item);
                             model.setRowCount(0);
                             showTable(ilist);
-                        }
-                    }
+                            
+                            FileReader File = new FileReader(new File(file));
+                            BufferedReader br = new BufferedReader(File);
+                            String temp = br.readLine();
+                            while (temp != null) {
+                            temp = br.readLine();
+                            System.out.println(temp);
 
-                    
-                    
+                            FileInputStream fis = new FileInputStream(file);
+                            try(ObjectInputStream objectstream = new ObjectInputStream(fis)){
+
+                                objectstream.readObject();
+                            }
+                            
+                    }
+                        
+                        
+                        }
+                    }             
+                
                         
                         
                 }
@@ -228,6 +246,32 @@ public class Stock extends JPanel {
     private class AddItemButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource()==addItem){
+
+
+                // ArrayList<Item> lines = new ArrayList<Item>();
+                // String line = null;
+                // Point point e.getPoint();
+                //  try
+                //     {
+                //         File f1 = new File(file);
+                //         FileReader fr = new FileReader(f1);
+                //         BufferedReader br = new BufferedReader(fr);
+                //         while (line = br.readLine() != null)
+                //         {
+                //             if (line.contains())
+                //                 line = line.replace("java", " ");
+                //             lines.add(line);
+                //         }
+                //         FileWriter fw = new FileWriter(f1);
+                //         BufferedWriter out = new BufferedWriter(fw);
+                //         out.write(lines.toString());
+                //     }
+                //     catch (Exception ex)
+                //     {
+                //         ex.printStackTrace();
+                //     }
+                
+
                 try{
                 if (item.getText().isEmpty()){
                 JOptionPane.showMessageDialog(pnl, "Incomplete Fields");
@@ -266,7 +310,7 @@ public class Stock extends JPanel {
     }
     private class DeleteButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent a) {
-            if (a.getSource() == delete){
+            if (a.getSource()==delete){
                 int row = table.getSelectedRow();
                 String val ="";
 

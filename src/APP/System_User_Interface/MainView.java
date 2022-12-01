@@ -1,6 +1,7 @@
 package APP.System_User_Interface;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -61,19 +62,20 @@ public class MainView extends JPanel {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == report)
         {
-            try{
-                APP.MonthlysalesReporting.SalesReportGenerator report = new APP.MonthlysalesReporting.SalesReportGenerator();
-                SystemDisplay newContentPane = new SystemDisplay();
-                newContentPane.setOpaque(false);
-            }
-            catch (Exception k)
-            {
-
+           try{
+            APP.MonthlysalesReporting.SalesReportGenerator.getInfo();
+           }
+           catch (Exception n)
+           {
+        
+            // JOptionPane.showInternalMessageDialog(this, "System Error");
+           }
+                
             }
         }
     }
 
-}  
+ 
 
     private class StockButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent x) {
@@ -105,16 +107,12 @@ public class MainView extends JPanel {
             if (e.getSource() == Order) {
 
                 try {
-                    
+                    APP.OrderManagement.Order Order = new APP.OrderManagement.Order();
                     SystemDisplay newContentPane = new SystemDisplay();
                     MainView mainView = new MainView();
-                    APP.OrderManagement.Order frame = new APP.OrderManagement.Order();
                     newContentPane.setOpaque(true);
                     mainView.setOpaque(false);
-                    frame.setTitle("Order");
-                    frame.setResizable(true);
-                    frame.pack();
-                    frame.setVisible(true);
+                    
 
                 } catch (Exception d) {
 

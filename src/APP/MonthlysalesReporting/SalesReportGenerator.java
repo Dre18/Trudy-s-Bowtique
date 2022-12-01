@@ -3,23 +3,23 @@ import java.io.*;
 import java.util.Scanner;
 
 public class SalesReportGenerator {
-	private String ON;
-	private String LN;
-	private String FN;
-	private String CN;
-	private String Addr;
-	private String OI;
-	private String Comments;
-	private String Status;
+	private static String ON;
+	private static String LN;
+	private static String FN;
+	private static String CN;
+	private static String Addr;
+	private static String OI;
+	private static String Comments;
+	private static String Status;
 	private static int numm=0;
-	private int count=0;
+	private static int count=0;
 	
 	
-	public void getInfo() {
+	public static void getInfo() {
 		numm++;
 		String temp=Integer.toString(numm);
 		try {
-	  		Scanner mReader = new Scanner(new File("unNamed.txt"));//Takes the name of the file that has all the orders,waiting on file to be built in orders class 
+	  		Scanner mReader = new Scanner(new File("OrderList.dat"));//Takes the name of the file that has all the orders,waiting on file to be built in orders class 
 	  		Scanner mWriter = new Scanner(new File("SalesReport.txt"));//Creates new file which will only have the sales
 	  		FileWriter myWriter = new FileWriter("SalesReport"+temp+".txt");//Will use to write to file
 	  		myWriter.write("********MONTHLY REPORT******* \n");
