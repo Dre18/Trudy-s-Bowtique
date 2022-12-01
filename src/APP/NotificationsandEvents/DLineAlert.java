@@ -1,36 +1,50 @@
 package APP.NotificationsandEvents;
 import java.util.*;
 
-public class DLineAlert {
-public class dateline{
-  private int[]values;
-// This method should accpet 3 values representing the day,month and year respectively and should place these values into an array. This will be th current date.
-public int[]setDate(int a, int b, int c){
-    int day= a;
-    int monthss= b;
-    int year= c;
-    int[]values={a,b,c};
-    return values;
-  }
+
+
+public class DLineAlert{
+   ArrayList<Integer>values = new ArrayList<>();
+   ArrayList<Integer>date = new ArrayList<>();
+
+  // Constructor
+public DLineAlert(){
+  
 }
-/*
-// This method shall accept an array containing a date, the days of this date willl be subtracted from each other the differnce will be calculated to see if its less 
-   or equal to or greater than 2, where a string shall return if the Deadline is appraoching or no.
- 
- public String void CompareDate(int[]date){
-  int sum1=date[0];
-  int sum2=values[0];
-  int sum3=sum2-sum1;
+  // Return the day value from ArrayList
+public int getdate(){
+  return values.get(0);
+}
+  // Insert the current date value into an Array
+public void setDate(int a, int b, int c){
+values.add(a);
+values.add(b);
+values.add(c); 
+  
+  }
+// This method will compare the dates from the order file and the current date.
+ public String CompareDate(ArrayList<Integer>date){
+  int sum1=date.get(0);
+  int sum2=values.get(0);
+  int sum3=sum1-sum2;
   if (sum3 > 2){ 
-  System.out.println("NO DEADLINE") ;
+  return"NO DEADLINE" ;
   }
   else if (sum3<=2){
-    System.out.println("DEADLINE APPROACHING");
+    return "DEADLINE APPROACHING";
   }
   else{
-    System.out.println("ERROR");
-    */
+    return "ERROR";
   }
-// }
-//  }
-// }
+}
+  // Will  add the date to the ArrayList.
+  public void addDate(int a,int b, int c){
+    date.add(a);
+    date.add(b);
+    date.add(c);
+  }
+  // Will return the date from Array List.
+  public int getdate1(){
+  return date.get(0);
+}
+}
