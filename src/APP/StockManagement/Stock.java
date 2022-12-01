@@ -278,16 +278,16 @@ public class Stock extends JPanel {
                             
                             while ((currentline =br.readLine()) != null) {
                                 String[] data = currentline.split(" ");
-                                num++;
-                                if (!(num==count)) {
+                                
+                                if (!(num==row)) {
                                      pw.println(currentline);
                                 }
                                 else{
                                     data[col]=val;
-                                    String txt= data[0]+" "+data[1];
+                                    String txt= data[0].replace(" ", "_")+" "+data[1];
                                      pw.println(txt);
                                 }
-                                
+                                num++;
                             }
                             pw.flush();
                             pw.close();
