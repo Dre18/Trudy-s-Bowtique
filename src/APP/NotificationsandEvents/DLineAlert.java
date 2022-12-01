@@ -3,12 +3,12 @@ import java.util.*;
 
 
 
-public class Dateline{
+public class DLineAlert{
    ArrayList<Integer>values = new ArrayList<>();
    ArrayList<Integer>date = new ArrayList<>();
 
   // Constructor
-public Dateline(){
+public DLineAlert(){
   
 }
   // Return the day value from ArrayList
