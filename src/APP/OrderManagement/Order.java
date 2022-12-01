@@ -574,7 +574,12 @@ public void actionPerformed(ActionEvent e) {
 		showTable(orderList);
     }
 	
-   
+    if (e.getSource()==sortByIncomplete){
+		Collections.reverse(orderList);
+		model.setRowCount(0);
+		showTable(orderList);
+    }
+	
 }
 
 private class Comp implements Comparator<OrdItem>
